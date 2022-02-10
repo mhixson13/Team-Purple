@@ -1,0 +1,10 @@
+What are my strengths and how can I contribute?
+
+I am very good at organization, problem solving, doing research, and 
+cleaning things up. 
+
+I can contribute to the team in each of these ways.
+I can make sure we stay organized with our folders in the repo, I can help
+figure out why code isn't working, and find more efficient ways of
+approaching problems. I can also do research to gain more knowledge on our
+project, and I can also help with debugging and making sure our code is clean.we

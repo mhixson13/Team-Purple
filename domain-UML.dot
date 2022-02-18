@@ -1,0 +1,19 @@
+/* 
+ * Julio Lopez
+ * 2/17/22
+ * CS 375
+ * 
+ * Domain UML
+ * 
+ * java -jar plantuml.jar Domain-UML.dot
+*/
+
+@startuml
+
+class Student {
+
+}
+
+class 
+
+@enduml

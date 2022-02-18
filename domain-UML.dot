@@ -28,7 +28,7 @@ class Student {
 
 }
 
-class TEACHER {
+class Teacher {
 	teacherID : int
   	getStudentEval() : int
 	setStudentEval(n : int)

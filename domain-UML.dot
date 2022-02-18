@@ -13,20 +13,20 @@
 
 class User {
 	name : String
-  getName(n : String)
-  setName() : void
+  getName() : String
+  setName(n : String)
 }
 
 class Student {
-	studentId : int
+	studentID : int
   class : String
-	- getPeerEval() : int
+	getPeerEval() : int
   setPeerEval(n : int)
   getClass : String
 }
 
 class Teacher {
-	teacherId : int
+	teacherID : int
   getStudentEval() : int
 	setStudentEval(n : int)
 }
@@ -50,15 +50,15 @@ class Answer {
 }
 
 class Evaluation {
-	evalTeamId : int
+	evalTeamID : int
   evalID : int
 }
 
 User "1" <|-- "1" Teacher : is a
 User "1" <|-- "1" Student : is a
 Team "1" *-- "1..*" Student : makes a
-Evaluation "1" <*-.- "1..*" Question : has
-Question "1..*" <|-- "1..*" Answer : is
-Student "1..*" <|-- "1..*" GradStudent : is
+Evaluation "1" -- "1..*" Question : has
+Question "1" -- "1..*" Answer : has
 
 @enduml
+

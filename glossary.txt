@@ -1,0 +1,24 @@
+Abstract: a class which only shows essesntial attributes and "hides" unnecessary information.
+
+Java: is a high-level, class-based, object-oriented programming language that is
+designed to have as few implementation dependencies as possible.
+
+Peer Evaluation: the many ways in which students can share their creative work with peers for
+constructive feedback, and then use this feedback to revise and improve their work.
+
+Public: means that the subject may be accessed by any class, protected by subclass, private by the class
+itself, no modifier means "package protected", so the subject may be accessed by classes from the same
+package.
+
+Private: are meant for inner workings of software that must be hidden from any other user.
+
+Final: is a class that can't be extended.
+
+
+
+
+
+
+
+
+

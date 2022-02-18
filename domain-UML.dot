@@ -23,12 +23,18 @@ class Student {
 	getPeerEval() : int
   setPeerEval(n : int)
   getClass : String
+  getName() : String
+  setName(n : String)
+
 }
 
-class Teacher {
+class TEACHER {
 	teacherID : int
-  getStudentEval() : int
+  	getStudentEval() : int
 	setStudentEval(n : int)
+	getName() : String
+  	setName(n : String)
+
 }
 
 class Team {
@@ -49,7 +55,7 @@ class Answer {
   answerType : String
 }
 
-class Evaluation {
+abstract class Evaluation {
 	evalTeamID : int
   evalID : int
 }

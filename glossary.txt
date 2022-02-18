@@ -14,7 +14,13 @@ Private: are meant for inner workings of software that must be hidden from any o
 
 Final: is a class that can't be extended.
 
+Method: is a collection of statements that perform some specific task and return the result to the caller.
 
+Class: is a template that describes the data and behavior associated with instances of that class.
+
+SubClass: a class that inherits from another class
+
+SuperClass: a class that is inherited/derived from 
 
 
 

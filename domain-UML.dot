@@ -3,10 +3,10 @@
  * Julio Lopez, Marlon Miller, Miranda Hixson
  * Project: Peer Evaluation UML
  * Audience: General University Classes
- * 2/17/22
- * CS 375
+ * Date: 2/17/22
+ * Class: CS 375
  * 
- * java -jar plantuml.jar Domain-UML.dot
+ * Command: java -jar plantuml.jar Domain-UML.dot
 */
 
 @startuml
@@ -20,7 +20,7 @@ class User {
 class Student {
 	studentId : int
   class : String
-	getPeerEval() : int
+	- getPeerEval() : int
   setPeerEval(n : int)
   getClass : String
 }
@@ -38,3 +38,27 @@ class Team {
   setTeamName(n : String)
   getTeamSize() : int
 }
+
+class Question {
+	questionID : int
+  questionType: String
+}
+
+class Answer {
+	answerID : int
+  answerType : String
+}
+
+class Evaluation {
+	evalTeamId : int
+  evalID : int
+}
+
+User "1" <|-- "1" Teacher : is a
+User "1" <|-- "1" Student : is a
+Team "1" *-- "1..*" Student : makes a
+Evaluation "1" <*-.- "1..*" Question : has
+Question "1..*" <|-- "1..*" Answer : is
+Student "1..*" <|-- "1..*" GradStudent : is
+
+@enduml

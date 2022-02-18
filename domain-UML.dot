@@ -1,19 +1,40 @@
 /* 
- * Julio Lopez
+ * Team Purple
+ * Julio Lopez, Marlon Miller, Miranda Hixson
+ * Project: Peer Evaluation UML
+ * Audience: General University Classes
  * 2/17/22
  * CS 375
- * 
- * Domain UML
  * 
  * java -jar plantuml.jar Domain-UML.dot
 */
 
 @startuml
 
-class Student {
-
+class User {
+	name : String
+  getName(n : String)
+  setName() : void
 }
 
-class 
+class Student {
+	studentId : int
+  class : String
+	getPeerEval() : int
+  setPeerEval(n : int)
+  getClass : String
+}
 
-@enduml
+class Teacher {
+	teacherId : int
+  getStudentEval() : int
+	setStudentEval(n : int)
+}
+
+class Team {
+	teamSize : int
+	teamName : String
+  getTeamName() : String
+  setTeamName(n : String)
+  getTeamSize() : int
+}

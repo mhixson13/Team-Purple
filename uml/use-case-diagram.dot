@@ -1,0 +1,33 @@
+/*
+	Team Purple
+	Julio Lopez, Marlon Miller, Miranda Hixson 
+	Peer Evaulation Project Use Case Diagram
+	2/24/22
+	CS 375
+
+	java -jar plantuml.jar use-case-diagram.dot
+*/
+
+@startuml
+
+"Answers Questions" as (ansQuestion)
+"Rates Peer" as (rPeer)
+
+
+:Team Member: as TeamMember
+TeamMember -- (Use)
+"Takes Peer Evaluation" as (Use)
+
+:Admin: as Admin
+Admin -- (Result)
+"Looks at Results" as (Result)
+
+:Team: as Group
+
+Use -- (ansQuestion)
+Use -- (rPeer)
+
+Group <|-- TeamMember
+Admin -- Group : manages
+
+@enduml

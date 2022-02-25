@@ -40,9 +40,6 @@ class Student {
     }
 }
 
-<<<<<<< HEAD
-}
-=======
 public class evaluation {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -69,4 +66,3 @@ public class evaluation {
     
     // Project Code Here
 }
->>>>>>> bbf6212333d66b5c73648b6e7f65403b33b93846

@@ -1,0 +1,10 @@
+2/24/22
+Julio Lopez, Marlon Miller, Miranda Hixson
+
+We have created our mvn project that will include our java code and
+junit testing for the peer evaluation project. By the end of our
+project, we should have working code that creates confidential 
+evaluations for students to take of other peers that will give
+the teachers feedback on their students. It should also have junit testing
+that accurately tests the code we have written. We also have our domain UML
+model which shows the relationships between all of the different classes.

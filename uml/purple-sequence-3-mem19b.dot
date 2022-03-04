@@ -1,0 +1,29 @@
+@startuml
+
+participant User as User
+entity Terminal as Terminal
+database Database as Database
+
+User -> Terminal: Opens and runs MVN
+Terminal -> Database : Authentication Request
+alt success case
+    Database -> Terminal : Authentication Accepted
+else Wrong Username or Password
+    Database -> Terminal : Authentical Failure
+end
+
+User -> Terminal: Obtain all Qs from P.E.
+Terminal -\\ Database: Query for specific P.E.
+Database -> Terminal: Returns questionaire
+Terminal -> User : Displays Questions
+User -> Terminal : Answers Questions
+Terminal -> Database : Store Request
+Database -> Database : Updates tables
+
+
+note right
+    Relationship Illustration between User,Terminal and Database. 
+    How to access Peer Evaluations and answer questions.
+end note
+
+@enduml

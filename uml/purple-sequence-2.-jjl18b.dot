@@ -1,0 +1,20 @@
+@startuml
+
+' person | writes reponse | saved into a string | inserted into DB | called from DB | inserted into CSV
+
+participant Person as Person
+entity Response as Response
+database Database as Database
+collections Output as Output
+
+Person -> Response : writes reponse
+Response -\\ Database : reponse entered into database
+Database -> Output : query grabs response and writes to CSV
+
+note right
+	this is the general process of a evaluation response
+	going into a database and writing to a CSV
+end note
+
+@enduml
+

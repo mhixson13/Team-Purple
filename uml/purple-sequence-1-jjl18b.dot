@@ -1,0 +1,15 @@
+@startuml
+
+participant Team as Team
+collections TeamEvaluations as TeamEvaluations
+
+Team -> TeamEvaluations : Retrieve Team Member Evaluations
+TeamEvaluations -> TeamEvaluations : Calculate Statistics
+TeamEvaluations -> Team : Give Team Statistics
+
+note right 
+	this is the general process of the sequence for a team
+	to get its statistics
+end note
+
+@enduml

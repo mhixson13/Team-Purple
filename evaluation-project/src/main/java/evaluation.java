@@ -14,7 +14,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner; 
 import java.io.IOException;
 import java.util.*;
-import com.opencsv.*;
+//import com.opencsv.*;
 import java.io.*;
 
 class User {
@@ -54,16 +54,16 @@ public class evaluation {
         System.out.println("The contents of the csv file are listed below.\n");
         parseCSV();
 
-        System.out.print("ID: ");
-        String ID = sc.nextLine();
-        System.out.print("Email: ");
-        String email = sc.nextLine();
-        System.out.print("Password: ");
-        String password = sc.nextLine();
+        // System.out.print("ID: ");
+        // String ID = sc.nextLine();
+        // System.out.print("Email: ");
+        // String email = sc.nextLine();
+        // System.out.print("Password: ");
+        // String password = sc.nextLine();
 
         options();
 
-        User user1 = new User("Marlon","Miller",566449);
+        //User user1 = new User("Marlon","Miller",566449);
     }
 
     public static void options() {
@@ -73,27 +73,46 @@ public class evaluation {
         System.out.println("   --Completed");
     }
 
-    // CSV Parse Method
     public static void parseCSV() {
         try {
-            // Reads file
-            FileReader fileReader = new FileReader(csv_file);
+            Scanner csvReader = new Scanner(new File(csv_file));
 
-            // Creating CSV parser
-            CSVReader csvReader = new CSVReaderBuilder(fileReader).withSkipLines(1).build();
+            // Parsing CSV into Scanner class
+            csvReader.useDelimiter(",");
 
-            // Reads CSV file into list
-            List<String[]> csvData = csvReader.readAll();
-
-            // Print Contents
-            for(String[] row : csvData) {
-                for(String cell : row) {
-                    System.out.print(cell + "\t");
-                }
-                System.out.println();
+            while (csvReader.hasNext()) {
+                System.out.print(csvReader.next());
             }
+
+            csvReader.close();
+            
         } catch (Exception e) {
-            e.printStackTrace();        }
+            System.out.println("An error occured.\n");
+            e.printStackTrace();
+        }
     }
+
+    // Parse CSV with OpenCSV Library
+    // public static void parseCSV() {
+    //     try {
+    //         // Reads file
+    //         FileReader fileReader = new FileReader(csv_file);
+
+    //         // Creating CSV parser
+    //         CSVReader csvReader = new CSVReaderBuilder(fileReader).withSkipLines(1).build();
+
+    //         // Reads CSV file into list
+    //         List<String[]> csvData = csvReader.readAll();
+
+    //         // Print Contents
+    //         for(String[] row : csvData) {
+    //             for(String cell : row) {
+    //                 System.out.print(cell + "\t");
+    //             }
+    //             System.out.println();
+    //         }
+    //     } catch (Exception e) {
+    //         e.printStackTrace();        }
+    // }
     
 }

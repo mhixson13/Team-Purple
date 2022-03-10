@@ -32,7 +32,4 @@ public class evaluationTest {
             System.out.println("\nTest Failed.\n");
         }
     }
-
-
-
 }

@@ -20,10 +20,10 @@ class User {
     public String lastName;
     public int ID;
 
-    public User(String fN, String lN, int id) {
-        firstName = fN;
-        lN = lastName;
-        id = ID;
+    public User(String firstName, String lastName, int ID) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.ID = ID;
     }
 }
 class Student {
@@ -41,28 +41,35 @@ class Student {
 }
 
 public class evaluation {
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String FirstName, LastName, ID;
-        String typePerson;
 
-        System.out.println("\nEvaluation Project by Team Purple\n");
+        System.out.println("\n\nWelcome to your Peer Evaluation Terminal Interface!");
+        System.out.println("Created by Team-Purple\n");
 
-        System.out.print("Teacher or Student? ");
-        typePerson = sc.nextLine();
+        System.out.println(" *Documentation:                   https://github.com/mhixson13/Team-Purple/tree/main/Documentation");
+        System.out.println(" *UML Diagrams:                    https://github.com/mhixson13/Team-Purple/tree/main/uml");
+        System.out.println(" *More:                            https://github.com/mhixson13/Team-Purple\n");
 
-        System.out.print("First Name: " );
-        FirstName = sc.nextLine();
-        System.out.print("Last Name: ");
-        LastName = sc.nextLine();
+
         System.out.print("ID: ");
-        ID = sc.nextLine();
+        String ID = sc.nextLine();
+        System.out.print("Email: ");
+        String email = sc.nextLine();
+        System.out.print("Password: ");
+        String password = sc.nextLine();
 
-        System.out.println("Welcome to your Peer Evaluation " + FirstName + " " + LastName);
+        options();
 
         User user1 = new User("Marlon","Miller",566449);
     }
 
-    
-    // Project Code Here
+    public static void options() {
+        System.out.println("\nOptions:");
+        System.out.println("   --Peer_Evaluations");
+        System.out.println("   --Missing");
+        System.out.println("   --Completed");
+    }
+
 }

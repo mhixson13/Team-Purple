@@ -1,26 +1,56 @@
 Abstract: a class which only shows essesntial attributes and "hides" unnecessary information.
 
+Class: is a template that describes the data and behavior associated with instances of that class.
+
+Complete: to finish something, making sure all parts are done
+
+Deploy: bring into effective action: utilize
+
+Distribute: to give shares of something, in this case hand out information
+
+Due Date: the date of which something falls due
+
+Evaluation: process of judging merit, worth, or significance of something
+
+Fill out: add information to complete a form or document
+
+Final: is a class that can't be extended.
+
+Instrument: a measuring device
+
 Java: is a high-level, class-based, object-oriented programming language that is
 designed to have as few implementation dependencies as possible.
 
+Method: is a collection of statements that perform some specific task and return the result to the caller.
+
 Peer Evaluation: the many ways in which students can share their creative work with peers for
 constructive feedback, and then use this feedback to revise and improve their work.
+
+p0wn: to defeat an opponent in conclusive and humiliating fashion 
+
+Private: are meant for inner workings of software that must be hidden from any other user.
 
 Public: means that the subject may be accessed by any class, protected by subclass, private by the class
 itself, no modifier means "package protected", so the subject may be accessed by classes from the same
 package.
 
-Private: are meant for inner workings of software that must be hidden from any other user.
+Question: a sentence expressed to prompt wanted information
 
-Final: is a class that can't be extended.
+Rate: assign a standard or value to something according to a particular scale
 
-Method: is a collection of statements that perform some specific task and return the result to the caller.
+Rating: ranking of someone based on an assessment of their quality or performance
 
-Class: is a template that describes the data and behavior associated with instances of that class.
+Scale: a way of basing measurements; ordered reference standard
 
 SubClass: a class that inherits from another class
 
 SuperClass: a class that is inherited/derived from 
+
+Survey: investigate the opinions or experience of a group of people by asking them questions
+
+Team: a group of people that come together to achieve a certain goal
+
+Team Member: an individual that is a part of a team
 
 
 

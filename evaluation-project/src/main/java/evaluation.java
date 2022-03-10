@@ -9,10 +9,12 @@
     java evaluation
 */
 
-import java.io.File; 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner; 
 import java.io.IOException;
 import java.util.*;
-
+import com.opencsv.*;
 import java.io.*;
 
 class User {
@@ -30,10 +32,6 @@ class Student {
     public int studentID;
     public String Period;
 
-    public void someMethod() {
-        System.out.println("It works rn!");
-    }
-
     public Student(int stuID, String Class) {
         this.studentID = stuID;
         this.Period = Class;
@@ -41,7 +39,8 @@ class Student {
 }
 
 public class evaluation {
-    
+
+    public static String csv_file = "ex.csv";
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -52,6 +51,8 @@ public class evaluation {
         System.out.println(" *UML Diagrams:                    https://github.com/mhixson13/Team-Purple/tree/main/uml");
         System.out.println(" *More:                            https://github.com/mhixson13/Team-Purple\n");
 
+        System.out.println("The contents of the csv file are listed below.\n");
+        parseCSV();
 
         System.out.print("ID: ");
         String ID = sc.nextLine();
@@ -72,4 +73,27 @@ public class evaluation {
         System.out.println("   --Completed");
     }
 
+    // CSV Parse Method
+    public static void parseCSV() {
+        try {
+            // Reads file
+            FileReader fileReader = new FileReader(csv_file);
+
+            // Creating CSV parser
+            CSVReader csvReader = new CSVReaderBuilder(fileReader).withSkipLines(1).build();
+
+            // Reads CSV file into list
+            List<String[]> csvData = csvReader.readAll();
+
+            // Print Contents
+            for(String[] row : csvData) {
+                for(String cell : row) {
+                    System.out.print(cell + "\t");
+                }
+                System.out.println();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();        }
+    }
+    
 }

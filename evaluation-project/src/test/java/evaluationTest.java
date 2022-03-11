@@ -32,4 +32,58 @@ public class evaluationTest {
             System.out.println("\nTest Failed.\n");
         }
     }
+
+    @Test
+    public void test1() {
+        try {
+            User user1 = new User("Marlon","Miller",566449);
+            assertEquals(user1.getLastName(),"Miller");
+        } catch(Exception e) { 
+            System.out.println("\nTest Failed");
+        }
+    }
+
+    @Test
+    public void test2() {
+        try {
+            User user1 = new User("Miranda","Hixson",123123);
+            user1.addRandomQs(5);
+            assertEquals(user1.question[0].getQuestionID(),0);
+        } catch(Exception e) { 
+            System.out.println(e);
+        }
+    }
+
+    @Test
+    public void test3() {
+        try {
+            User user1 = new User("Julio","Lopez",321321);
+            user1.addRandomQs(5);
+            assertEquals(user1.question[4].getQuestionType(),"T/F");
+        } catch(Exception e) { 
+            System.out.println("\nTest Failed");
+        }
+    }
+
+    @Test
+    public void test4() {
+        try {
+            User user1 = new User("Dr","Reeves",198231);
+            user1.addRandomQs(5);
+            assertEquals(user1.question[2].getTheQuestion(),"Question? 2");
+        } catch(Exception e) { 
+            System.out.println("\nTest Failed");
+        }
+    }
+
+    @Test
+    public void test5() {
+        try {
+            User user1 = new User("John","Homer",123321);
+            user1.addRandomQs(10);
+            assertEquals(user1.question[9].QuestionType,"MC");
+        } catch(Exception e) { 
+            System.out.println("\nTest Failed");
+        }
+    }
 }

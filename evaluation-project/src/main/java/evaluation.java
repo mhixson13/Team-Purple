@@ -17,17 +17,6 @@ import java.util.*;
 //import com.opencsv.*;
 import java.io.*;
 
-class User {
-    public String firstName;
-    public String lastName;
-    public int ID;
-
-    public User(String firstName, String lastName, int ID) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.ID = ID;
-    }
-}
 class Student {
     public int studentID;
     public String Period;
@@ -36,6 +25,71 @@ class Student {
         this.studentID = stuID;
         this.Period = Class;
     }
+}
+class Teacher {
+    public int teacherID;
+}
+class Question {
+    public int QuestionID;
+    public String TheQuestion;
+    public String QuestionType;
+
+    public Question(int QuestionID, String TheQuestion, String QuestionType) {
+        this.QuestionID = QuestionID;
+        this.TheQuestion = TheQuestion;
+        this.QuestionType = QuestionType;
+    }
+
+    public int getQuestionID() {
+        return this.QuestionID;
+    }
+    public String getTheQuestion() {
+        return this.TheQuestion;
+    }
+    public String getQuestionType() {
+        return this.QuestionType;
+    }
+}
+class User {
+    public String firstName;
+    public String lastName;
+    public int ID;
+
+    public Question[] question = new Question[100];
+
+    public User(String firstName, String lastName, int ID) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.ID = ID;
+    }
+
+    // public String getQuestion(int n) {
+    //     return this.question[n].TheQuestion;
+    // }
+    public void addRandomQs(int n) {
+        String[] array = {"T/F","MC","LK4","SA"};
+        int m = 0;
+        for(int i = 0; i < n; i++)
+        {
+            if(m == 4) 
+                m = 0;
+            this.question[i] = new Question(i,"Question? " + i,array[m++]);
+        }
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public String getLastName() {
+        return this.lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    
 }
 
 public class evaluation {
@@ -54,14 +108,17 @@ public class evaluation {
         System.out.println("The contents of the csv file are listed below.\n");
         parseCSV();
 
-        // System.out.print("ID: ");
-        // String ID = sc.nextLine();
-        // System.out.print("Email: ");
-        // String email = sc.nextLine();
-        // System.out.print("Password: ");
+        
+        System.out.print("ID: ");
+        String ID = sc.nextLine();
+        System.out.print("Email: ");
+        String email = sc.nextLine();
+        System.out.print("Password: ");
         // String password = sc.nextLine();
+        System.out.println();
 
-        options();
+        User user1 = new User("Marlon","Miller",566449);
+        //options();
 
         //User user1 = new User("Marlon","Miller",566449);
     }

@@ -1,5 +1,5 @@
 drop database if exists CS375v1;
-create database CS375v1;
+create database CS375v1 encoding 'UTF-8';
 \c CS375v1;
 
 drop table if exists question;

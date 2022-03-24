@@ -1,23 +1,24 @@
-drop database if exists CS375v1;
-create database CS375v1 encoding 'UTF-8';
-\c CS375v1;
+--  \i 'C:/Users/Marlon Miller/Desktop/SE2/Team-Purple/CS375v1.sql'
+drop database if exists cs375v1;
+create database cs375v1 encoding 'UTF-8';
+\c cs375v1;
 
 drop table if exists question;
 create table question (
-    id primary key,
+    id serial primary key,
     id_evaluation int,
     text text,
     question_type varchar(2)
 );
 
 insert into question (id,id_evaluation,text,question_type) values
-(1,1,"Level of Responsibility","L4"),
-(2,1,"Level of Collaboration","L4"),
-(3,1,"Where there contributions?","TF"),
-(4,1,"Communicates Clearly?","MC"),
-(5,2,"Motivation","L5"),
-(6,2,"Team Community","L4"),
-(7,2,"Doubts on Teammates","L3");
+(1,1,'Level of Responsibility','L4'),
+(2,1,'Level of Collaboration','L4'),
+(3,1,'Where there contributions?','TF'),
+(4,1,'Communicates Clearly?','MC'),
+(5,2,'Motivation','L5'),
+(6,2,'Team Community','L4'),
+(7,2,'Doubts on Teammates','L3');
 
 drop table if exists choices_MC;
 create table choices (
@@ -31,7 +32,7 @@ create table choices (
 drop table if exists evaluation;
 create table evaluation (
     id_evaluation int,
-    class_id text
+    class_id int
 );
 
 insert into evaluation (id_evaluation,class_id) values
@@ -47,10 +48,12 @@ create table class (
 );
 
 insert into class (class_id, class_name) values 
-(1001,"Software Engineering II"),
-(2002,"Programming Languages"),
-(3003,"Advanced Bible"),
-(4004,"2D Animation");
+(1001,'Software Engineering II'),
+(2002,'Programming Languages'),
+(3003,'Advanced Bible'),
+(4004,'2D Animation');
 
-select a.class_name, a.class_id, b.class_id from class a 
+--Joining example of how classes connect to their appropriate
+--evaluations
+select a.class_name, a.class_id, b.id_evaluation from class a 
 join evaluation b on b.class_id = a.class_id order by a.class_name;

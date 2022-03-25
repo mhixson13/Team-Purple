@@ -17,6 +17,14 @@ import java.util.*;
 //import com.opencsv.*;
 import java.io.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+//import java.postgresql-42.3.3;
+
 class Student {
     public int studentID;
     public String Period;
@@ -92,36 +100,65 @@ class User {
     
 }
 
+// ---------------------------------
+
 public class evaluation {
 
     public static String csv_file = "ex.csv";
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("\n\nWelcome to your Peer Evaluation Terminal Interface!");
-        System.out.println("Created by Team-Purple\n");
-
-        System.out.println(" *Documentation:                   https://github.com/mhixson13/Team-Purple/tree/main/Documentation");
-        System.out.println(" *UML Diagrams:                    https://github.com/mhixson13/Team-Purple/tree/main/uml");
-        System.out.println(" *More:                            https://github.com/mhixson13/Team-Purple\n");
-
-        System.out.println("The contents of the csv file are listed below.\n");
-        parseCSV();
+        String jdbcURL = "jdbc:postgresql://localhost:5432/cs375v1";
+        String username = "postgres";
+        String password = "password";
 
         
-        System.out.print("ID: ");
-        String ID = sc.nextLine();
-        System.out.print("Email: ");
-        String email = sc.nextLine();
-        System.out.print("Password: ");
-        // String password = sc.nextLine();
-        System.out.println();
+        try {
+            Connection connection = DriverManager.getConnection(jdbcURL,username,password);
+            System.out.println("Connected to PostgreSQL server");
+            
+            String sql = "insert into question (id,question_id,id_evaluation,text,question_type) values"
+            		+ "(8,4,2,'Level of Responsibility','L4');";
+            
+            Statement statement = connection.createStatement();
+            int rows = statement.executeUpdate(sql);
+            if(rows > 0) {
+            	System.out.println("A new statement is being printed");
+            }
+            
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("Error in connecting to PostgreSQL server");
+            e.printStackTrace();
+        }
 
-        User user1 = new User("Marlon","Miller",566449);
+
+        // System.out.println("\n\nWelcome to your Peer Evaluation Terminal Interface!");
+        // System.out.println("Created by Team-Purple\n");
+
+        // System.out.println(" *Documentation:                   https://github.com/mhixson13/Team-Purple/tree/main/Documentation");
+        // System.out.println(" *UML Diagrams:                    https://github.com/mhixson13/Team-Purple/tree/main/uml");
+        // System.out.println(" *More:                            https://github.com/mhixson13/Team-Purple\n");
+
+        // System.out.println("The contents of the csv file are listed below.\n");
+        // parseCSV();
+
+        
+        // System.out.print("ID: ");
+        // String ID = sc.nextLine();
+        // System.out.print("Email: ");
+        // String email = sc.nextLine();
+        // System.out.print("Password: ");
+        // // String password = sc.nextLine();
+        // System.out.println();
+
+        // User user1 = new User("Marlon","Miller",566449);
         //options();
 
         //User user1 = new User("Marlon","Miller",566449);
     }
+
+    // -------------------------------------
 
     public static void options() {
         System.out.println("\nOptions:");

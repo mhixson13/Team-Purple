@@ -109,16 +109,27 @@ public class evaluation {
         Scanner sc = new Scanner(System.in);
 
         String jdbcURL = "jdbc:postgresql://localhost:5432/cs375v1";
-        String username = "postgres";
-        String password = "password";
+//        String username = "mrblee";
+//        String password = "purplewhite";
+        
+        System.out.println("\n\nWelcome to your Peer Evaluation Terminal Interface!");
+        System.out.println("Created by Team-Purple\n");
 
+        System.out.println(" *Documentation:                   https://github.com/mhixson13/Team-Purple/tree/main/Documentation");
+        System.out.println(" *UML Diagrams:                    https://github.com/mhixson13/Team-Purple/tree/main/uml");
+        System.out.println(" *More:                            https://github.com/mhixson13/Team-Purple\n");
+        
+        System.out.print("Username: ");
+        String username = sc.nextLine();
+        System.out.print("Password: ");
+        String password = sc.nextLine();
         
         try {
             Connection connection = DriverManager.getConnection(jdbcURL,username,password);
             System.out.println("Connected to PostgreSQL server");
             
-            String sql = "insert into question (id,question_id,id_evaluation,text,question_type) values"
-            		+ "(8,4,2,'Level of Responsibility','L4');";
+            String sql = "insert into class (class_id, class_name) values "
+            		+ "(5005,'SE1');";
             
             Statement statement = connection.createStatement();
             int rows = statement.executeUpdate(sql);
@@ -144,13 +155,13 @@ public class evaluation {
         // parseCSV();
 
         
-        // System.out.print("ID: ");
-        // String ID = sc.nextLine();
-        // System.out.print("Email: ");
-        // String email = sc.nextLine();
-        // System.out.print("Password: ");
-        // // String password = sc.nextLine();
-        // System.out.println();
+//         System.out.print("ID: ");
+//         String ID = sc.nextLine();
+//         System.out.print("Email: ");
+//         String email = sc.nextLine();
+//         System.out.print("Password: ");
+//         // String password = sc.nextLine();
+//         System.out.println();
 
         // User user1 = new User("Marlon","Miller",566449);
         //options();

@@ -112,10 +112,11 @@ public class evaluation {
         
         Scanner sc = new Scanner(System.in);
         Connection c = null;
+        String username = "";
 
         while(true) {
-            System.out.print("Username: ");
-            String username = sc.nextLine();
+            System.out.print("\nUsername: ");
+            username = sc.nextLine();
             System.out.print("Password: ");
             String password = sc.nextLine();
 
@@ -125,7 +126,7 @@ public class evaluation {
             username, password);
             break;
             } catch (Exception e) {
-                System.out.println("\nYour account or password is incorrect.\n");
+                System.out.println("\nYour account or password is incorrect.");
                 // e.printStackTrace();
                 // System.err.println(e.getClass().getName()+": "+e.getMessage());
                 // System.exit(0);
@@ -133,8 +134,30 @@ public class evaluation {
             }
         }
         
-        System.out.println("Opened database successfully");
-        
+        System.out.println("\nWelcome back " + username + "!\n");
+        System.out.println("Here are your active evaluations:");
+
+        String query = "select * from evaluation order by evalid";
+        ResultSet rs = null;
+
+        try {
+
+        PreparedStatement pstmt = c.prepareStatement(query);
+        rs = pstmt.executeQuery();
+
+        System.out.println("evalid\tclassid");
+
+        while(rs.next()) {
+            System.out.print(rs.getInt(1));
+            System.out.print("\t");
+            System.out.print(rs.getInt(2));
+            System.out.println("\t\t");
+        }
+
+        } catch(Exception exec) {
+            exec.printStackTrace();
+        }
+
         
 
 //         String jdbcURL = "jdbc:postgresql://localhost:5432/cs375v1";

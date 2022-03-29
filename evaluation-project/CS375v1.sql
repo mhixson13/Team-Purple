@@ -1,4 +1,4 @@
---  \i 'C:/Users/Marlon Miller/Desktop/SE2/Team-Purple/CS375v1.sql'
+--  \i 'C:/Users/Marlon Miller/Desktop/SE2/Team-Purple/evaluation-project/CS375v1.sql'
 
 -- CS375v1 Database Property of Purple
 -- Members: Marlon Miller, Julio Lopez, Miranda Hixson
@@ -26,6 +26,54 @@ insert into question (id,question_id,evalid,text,question_type) values
 (5,1,2,'Motivation','L5'),
 (6,2,2,'Team Community','L4'),
 (7,3,2,'Doubts on Teammates','L3');
+
+drop table if exists users;
+create table users (
+    bannerid int,
+    name_ varchar(50),
+    username varchar(10),
+    acadstatus varchar(50)
+);
+
+insert into users (bannerid, name_, username, acadstatus) values
+(100, 'Marlon Miller', 'mem19b', 'Student'),
+(101, 'Miranda Hixson', 'mbh18b', 'Student'),
+(102, 'Julio Lopez', 'jjl18b', 'Student'),
+(103, 'Brent Reeves','mrblee','Teacher'),
+(104, 'Alex Jackson','asj18a','Student'),
+(105, 'Justin Raitz','jmr18c','Student'),
+(106, 'Brett Hammot','bah20a','Student'),
+(107,'Fischer Coburn', 'fwc17a', 'Student'),
+(108,'Mitchel Mellrose','wmm18a','Student'),
+(109,'Luis Ibarra','lai19a','Student'),
+(110,'Christa Greenwood','cgg20a','Student'),
+(111,'Megan Skeen','mfs18a','Student'),
+(112,'Garrett Powell','gbp18a','Student');
+
+drop table if exists teams;
+create table teams (
+    teamid int,
+    bannerid int,
+    teamname varchar(50)
+);
+
+insert into teams (teamid,bannerid,teamname) values 
+(10,100,'Purple'),
+(10,101,'Purple'),
+(10,102,'Purple'),
+(11,104,'FightFight'),
+(11,105,'FightFight'),
+(11,106,'FightFight'),
+(12,107,'White'),
+(12,108,'White'),
+(12,109,'White'),
+(13,110,'Fight'),
+(13,111,'Fight'),
+(13,112,'Fight');
+
+select a.teamname, a.teamid, b.name_ from teams a 
+inner join users b on a.bannerid = b.bannerid
+order by a.teamid, a.teamname, b.name_;
 
 drop table if exists choices;
 create table choices (
@@ -188,6 +236,7 @@ insert into section5(subsentence, response) values
 
 --Joining example of how classes connect to their appropriate
 --evaluations
+
 select a.class_name as Class, a.class_id as ClassID, b.evalid as Evaluation 
 from class a join evaluation b on b.class_id = a.class_id order by a.class_name;
 

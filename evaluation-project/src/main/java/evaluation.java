@@ -114,8 +114,15 @@ public class evaluation {
         Connection c = null;
         String username = "";
 
+        System.out.println("\nWelcome to your Peer Evaluation Terminal Interface!");
+        System.out.println("From: Created by Team-Purple\n");
+
+        System.out.println(" *Documentation:                   https://github.com/mhixson13/Team-Purple/tree/main/Documentation");
+        System.out.println(" *UML Diagrams:                    https://github.com/mhixson13/Team-Purple/tree/main/uml");
+        System.out.println(" *More:                            https://github.com/mhixson13/Team-Purple\n");
+
         while(true) {
-            System.out.print("\nUsername: ");
+            System.out.print("Username: ");
             username = sc.nextLine();
             System.out.print("Password: ");
             String password = sc.nextLine();
@@ -126,7 +133,7 @@ public class evaluation {
             username, password);
             break;
             } catch (Exception e) {
-                System.out.println("\nYour account or password is incorrect.");
+                System.out.println("\nYour account or password is incorrect.\n");
                 // e.printStackTrace();
                 // System.err.println(e.getClass().getName()+": "+e.getMessage());
                 // System.exit(0);
@@ -134,91 +141,37 @@ public class evaluation {
             }
         }
         
-        System.out.println("\nWelcome back " + username + "!\n");
-        System.out.println("Here are your active evaluations:");
+        System.out.println("\nWelcome " + username + "!\n");
+        printEval(c,username);
+    }
 
-        String query = "select * from evaluation order by evalid";
+    public static void printEval(Connection c, String username) {
+        String query = "select a.teamname from teams a inner join users b on a.bannerid = b.bannerid where b.username = '" + username  + "';";
         ResultSet rs = null;
-
         try {
 
         PreparedStatement pstmt = c.prepareStatement(query);
         rs = pstmt.executeQuery();
-
-        System.out.println("evalid\tclassid");
+        System.out.println("You are in the following team(s): ");
 
         while(rs.next()) {
-            System.out.print(rs.getInt(1));
-            System.out.print("\t");
-            System.out.print(rs.getInt(2));
-            System.out.println("\t\t");
+            System.out.print("-- ");
+            System.out.println(rs.getString(1));
         }
+            
+
+        // System.out.println("evalid\tclassid");
+
+        // while(rs.next()) {
+        //     System.out.print(rs.getInt(1));
+        //     System.out.print("\t");
+        //     System.out.print(rs.getInt(2));
+        //     System.out.println("\t\t");
+        // }
 
         } catch(Exception exec) {
             exec.printStackTrace();
         }
-
-        
-
-//         String jdbcURL = "jdbc:postgresql://localhost:5432/cs375v1";
-// //        String username = "mrblee";
-// //        String password = "purplewhite";
-        
-//         System.out.println("\n\nWelcome to your Peer Evaluation Terminal Interface!");
-//         System.out.println("Created by Team-Purple\n");
-
-//         System.out.println(" *Documentation:                   https://github.com/mhixson13/Team-Purple/tree/main/Documentation");
-//         System.out.println(" *UML Diagrams:                    https://github.com/mhixson13/Team-Purple/tree/main/uml");
-//         System.out.println(" *More:                            https://github.com/mhixson13/Team-Purple\n");
-        
-//         System.out.print("Username: ");
-//         String username = sc.nextLine();
-//         System.out.print("Password: ");
-//         String password = sc.nextLine();
-        
-//         try {
-//             Connection connection = DriverManager.getConnection(jdbcURL,username,password);
-//             System.out.println("Connected to PostgreSQL server");
-            
-//             String sql = "insert into class (class_id, class_name) values "
-//             		+ "(5005,'SE1');";
-            
-//             Statement statement = connection.createStatement();
-//             int rows = statement.executeUpdate(sql);
-//             if(rows > 0) {
-//             	System.out.println("A new statement has been inserted");
-//             }
-            	
-//             connection.close();
-//         } catch (SQLException e) {
-//             System.out.println("Error in connecting to PostgreSQL server");
-//             e.printStackTrace();
-//         }
-
-
-        // System.out.println("\n\nWelcome to your Peer Evaluation Terminal Interface!");
-        // System.out.println("Created by Team-Purple\n");
-
-        // System.out.println(" *Documentation:                   https://github.com/mhixson13/Team-Purple/tree/main/Documentation");
-        // System.out.println(" *UML Diagrams:                    https://github.com/mhixson13/Team-Purple/tree/main/uml");
-        // System.out.println(" *More:                            https://github.com/mhixson13/Team-Purple\n");
-
-        // System.out.println("The contents of the csv file are listed below.\n");
-        // parseCSV();
-
-        
-//         System.out.print("ID: ");
-//         String ID = sc.nextLine();
-//         System.out.print("Email: ");
-//         String email = sc.nextLine();
-//         System.out.print("Password: ");
-//         // String password = sc.nextLine();
-//         System.out.println();
-
-        // User user1 = new User("Marlon","Miller",566449);
-        //options();
-
-        //User user1 = new User("Marlon","Miller",566449);
     }
 
     // -------------------------------------
@@ -274,18 +227,3 @@ public class evaluation {
     // }
 
 // -----------------------------
-
-//            System.out.println("\nThis are the following Evaluations");
-//            sql = "select class_name from class;";
-//            
-//            ResultSet result = statement.executeQuery(sql);
-//            System.out.print(result);
-//            
-//            while(result.next()) {
-//            	String classes = result.getString("class_name");
-////            	String evalid = result.getString("evalid");
-////            	String questionid = result.getString("question_id");
-////            	String text = result.getString("text");
-//            	
-//            	System.out.printf("%d - %s - %s - %s\n", classes);
-//            }

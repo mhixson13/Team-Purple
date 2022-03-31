@@ -5,6 +5,11 @@
 -- Date: 3-24-2022
 -- Project: Peer Evaluation UI
 
+-- psql command to copy csv into database
+-- make sure you run 'psql -U postgres' inside the Team-Purple directory
+-- meaning '\Team-Purple> psql -U postgres'
+--\copy response(evalid, student1, student2, category, value) from 'evaluation-project/src/resources/response.csv' delimiter ',' csv header;
+
 --\c postgres
 drop database if exists cs375v1;
 create database cs375v1 encoding 'UTF-8';
@@ -349,8 +354,16 @@ join choices b on a.question_type = b.question_type;
 
 SELECT * FROM Section1;
 
+create view v_teams as 
+select * from teams;
+
+select * from v_teams;
+
 CREATE VIEW v_response AS
 SELECT *
 FROM response;
 
 SELECT * FROM v_response; 
+
+-- Command in psql to read CVS file and insert into tables
+-- copy response(evalid, student1, student2, category, value) from 'C:\Users\Marlon Miller\Desktop\SE2\Team-Purple\evaluation-project\src\resources\response.csv' delimiter ',' csv header;

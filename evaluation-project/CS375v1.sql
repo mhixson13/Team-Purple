@@ -53,6 +53,13 @@ insert into users (bannerid, name_, username, acadstatus) values
 
 drop table if exists teams;
 create table teams (
+    evalid int,
+    teamid int,
+    student int
+);
+/*
+drop table if exists teams;
+create table teams (
     teamid int,
     bannerid int,
     teamname varchar(50)
@@ -70,17 +77,28 @@ insert into teams (teamid,bannerid,teamname) values
 (12,109,'White'),
 (13,110,'Fight'),
 (13,111,'Fight'),
-(13,112,'Fight'),
+(13,112,'Fight'),   
 (14,100,'Blue'),
-(15,100,'Phil Schuberts Team');
+(15,100,'Phil Schuberts Team'); */
 
+drop table response cascade;
+drop table if exists response;
+create table response (
+    evalid int,
+    student1 int,
+    student2 int,
+    category varchar(10),
+    value int
+);
+
+/*
 select a.teamname from teams a 
 inner join users b on a.bannerid = b.bannerid
 where b.username = 'mem19b';
 
 select a.teamname, a.teamid, b.name_ from teams a 
 inner join users b on a.bannerid = b.bannerid
-order by a.teamid, a.teamname, b.name_;
+order by a.teamid, a.teamname, b.name_;*/
 
 drop table if exists choices;
 create table choices (
@@ -129,6 +147,7 @@ insert into class (class_id, class_name) values
 (3003,'Advanced Bible'),
 (4004,'2D Animation');
 
+/*
 drop table response cascade;
 create table response(
     evalid int primary key, 
@@ -141,7 +160,7 @@ create table response(
 insert into response (evalid, student1, student2, category, value) values
 (1,1,2,'POS',5),
 (2,2,3,'NEU',3),
-(3,3,4,'NEG',1);
+(3,3,4,'NEG',1); */
 
 drop table if exists Section1;
 create table Section1(

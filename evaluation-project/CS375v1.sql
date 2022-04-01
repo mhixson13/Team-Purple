@@ -366,5 +366,7 @@ FROM response;
 
 SELECT * FROM v_response; 
 
+select student2, avg(value) from response group by student2;
+
 -- Command in psql to read CVS file and insert into tables
 -- copy response(evalid, student1, student2, category, value) from 'C:\Users\Marlon Miller\Desktop\SE2\Team-Purple\evaluation-project\src\resources\response.csv' delimiter ',' csv header;

@@ -142,7 +142,7 @@ public class evaluation {
         }
         
         System.out.println("\nWelcome " + username + "!\n");
-        printEval(c,username);
+       // printEval(c,username);
     }
 
     public static void printEval(Connection c, String username) {

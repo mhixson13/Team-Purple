@@ -96,14 +96,7 @@ create table response (
     value int
 );
 
-/*
-select a.teamname from teams a 
-inner join users b on a.bannerid = b.bannerid
-where b.username = 'mem19b';
 
-select a.teamname, a.teamid, b.name_ from teams a 
-inner join users b on a.bannerid = b.bannerid
-order by a.teamid, a.teamname, b.name_;*/
 
 drop table if exists choices;
 create table choices (
@@ -267,6 +260,12 @@ insert into section5(subsentence, response) values
 
 --Joining example of how classes connect to their appropriate
 --evaluations
+
+drop owned by mrblee;
+drop user if exists mrblee;
+create user mrblee with password 'purplewhite';
+grant connect on database cs375v1 to mrblee;
+grant select, update, delete on all tables in schema public to mrblee;
 
 drop owned by mem19b;
 drop user if exists mem19b;

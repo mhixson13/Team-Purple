@@ -9,7 +9,7 @@
 -- make sure you run 'psql -U postgres' inside the Team-Purple directory
 -- meaning '\Team-Purple> psql -U postgres'
 --\copy response(evalid, student1, student2, category, value) from 'evaluation-project/src/resources/response.csv' delimiter ',' csv header;
-
+--\copy teams(evalid, teamid, student) from 'evaluation-project/src/resources/teams.csv' delimiter ',' csv header;
 --\c postgres
 drop database if exists cs375v1;
 create database cs375v1 encoding 'UTF-8';
@@ -339,6 +339,8 @@ create user gbp18a with password 'gbp18a';
 grant connect on database cs375v1 to gbp18a;
 grant select, update, delete on all tables in schema public to gbp18a;
 
+\copy response(evalid, student1, student2, category, value) from 'evaluation-project/src/resources/response.csv' delimiter ',' csv header;
+\copy teams(evalid, teamid, student) from 'evaluation-project/src/resources/teams.csv' delimiter ',' csv header;
 
 select a.class_name as Class, a.class_id as ClassID, b.evalid as Evaluation 
 from class a join evaluation b on b.class_id = a.class_id order by a.class_name;

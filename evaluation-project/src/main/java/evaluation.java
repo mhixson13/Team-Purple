@@ -114,6 +114,9 @@ public class evaluation {
         Connection c = null;
         String username = "";
 
+        //String csv = "\copy teams(evalid, teamid, student) from 'evaluation-project/src/resources/teams.csv' delimiter ',' csv header;";
+        //System.out.println(csv);
+
         System.out.println("\nWelcome to your Peer Evaluation Terminal Interface!");
         System.out.println("From: Created by Team-Purple\n");
 

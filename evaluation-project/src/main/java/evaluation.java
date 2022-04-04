@@ -114,9 +114,9 @@ public class evaluation {
         Connection c = null;
         String username = "";
 
-        //String csv = "\copy teams(evalid, teamid, student) from 'evaluation-project/src/resources/teams.csv' delimiter ',' csv header;";
-        //System.out.println(csv);
-
+        String csv = "\\copy teams(evalid, teamid, student) from 'evaluation-project/src/resources/teams.csv' delimiter ',' csv header;";
+        parseCSV();
+        
         System.out.println("\nWelcome to your Peer Evaluation Terminal Interface!");
         System.out.println("From: Created by Team-Purple\n");
 
@@ -188,6 +188,8 @@ public class evaluation {
 
     public static void parseCSV() {
         try {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("response.csv");
+            BufferReader reader = new BufferedReader(new InputStreamReader(inputStream ));
             Scanner csvReader = new Scanner(new File(csv_file));
 
             // Parsing CSV into Scanner class

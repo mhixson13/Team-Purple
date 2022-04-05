@@ -1,4 +1,4 @@
---  \i 'C:/Users/Marlon Miller/Desktop/SE2/Team-Purple/evaluation-project/CS375v1.sql'
+--  \i 'C:/Users/Marlon Miller/Desktop/SE2/Team-Purple/evaluation-project/src/resources/CS375v1.sql'
 
 -- CS375v1 Database Property of Purple
 -- Members: Marlon Miller, Julio Lopez, Miranda Hixson

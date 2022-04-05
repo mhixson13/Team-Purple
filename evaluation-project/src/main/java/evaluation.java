@@ -188,8 +188,8 @@ public class evaluation {
 
     public static void parseCSV() {
         try {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("response.csv");
-            BufferReader reader = new BufferedReader(new InputStreamReader(inputStream ));
+            //InputStream inputStream = getClass().getClassLoader().getResourceAsStream("response.csv");
+            //BufferReader reader = new BufferedReader(new InputStreamReader(inputStream ));
             Scanner csvReader = new Scanner(new File(csv_file));
 
             // Parsing CSV into Scanner class

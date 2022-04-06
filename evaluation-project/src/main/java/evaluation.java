@@ -25,84 +25,6 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
-//import java.postgresql-42.3.3;
-
-// class Student {
-//     public int studentID;
-//     public String Period;
-
-//     public Student(int stuID, String Class) {
-//         this.studentID = stuID;
-//         this.Period = Class;
-//     }
-// }
-// class Teacher {
-//     public int teacherID;
-// }
-// class Question {
-//     public int QuestionID;
-//     public String TheQuestion;
-//     public String QuestionType;
-
-//     public Question(int QuestionID, String TheQuestion, String QuestionType) {
-//         this.QuestionID = QuestionID;
-//         this.TheQuestion = TheQuestion;
-//         this.QuestionType = QuestionType;
-//     }
-
-//     public int getQuestionID() {
-//         return this.QuestionID;
-//     }
-//     public String getTheQuestion() {
-//         return this.TheQuestion;
-//     }
-//     public String getQuestionType() {
-//         return this.QuestionType;
-//     }
-// }
-// class User {
-//     public String firstName;
-//     public String lastName;
-//     public int ID;
-
-//     public Question[] question = new Question[100];
-
-//     public User(String firstName, String lastName, int ID) {
-//         this.firstName = firstName;
-//         this.lastName = lastName;
-//         this.ID = ID;
-//     }
-
-//     // public String getQuestion(int n) {
-//     //     return this.question[n].TheQuestion;
-//     // }
-//     public void addRandomQs(int n) {
-//         String[] array = {"T/F","MC","LK4","SA"};
-//         int m = 0;
-//         for(int i = 0; i < n; i++)
-//         {
-//             if(m == 4) 
-//                 m = 0;
-//             this.question[i] = new Question(i,"Question? " + i,array[m++]);
-//         }
-//     }
-
-//     public String getFirstName() {
-//         return this.firstName;
-//     }
-//     public void setFirstName(String firstName) {
-//         this.firstName = firstName;
-//     }
-//     public String getLastName() {
-//         return this.lastName;
-//     }
-//     public void setLastName(String lastName) {
-//         this.lastName = lastName;
-//     }
-    
-// }
-
-// ---------------------------------
 
 public class evaluation {
 
@@ -114,8 +36,14 @@ public class evaluation {
         Connection c = null;
         String username = "";
 
+        File responseCSV = new File("..\\..\\resources\\response.csv");
+        File teamsCSV = new File("..\\..\\resources\\teams.csv"); 
+
+        parseCSV(responseCSV);
+        parseCSV(teamsCSV);
+
         String csv = "\\copy teams(evalid, teamid, student) from 'evaluation-project/src/resources/teams.csv' delimiter ',' csv header;";
-        parseCSV();
+
         
         System.out.println("\nWelcome to your Peer Evaluation Terminal Interface!");
         System.out.println("From: Created by Team-Purple\n");
@@ -162,16 +90,6 @@ public class evaluation {
             System.out.println(rs.getString(1));
         }
             
-
-        // System.out.println("evalid\tclassid");
-
-        // while(rs.next()) {
-        //     System.out.print(rs.getInt(1));
-        //     System.out.print("\t");
-        //     System.out.print(rs.getInt(2));
-        //     System.out.println("\t\t");
-        // }
-
         } catch(Exception exec) {
             exec.printStackTrace();
         }
@@ -186,20 +104,29 @@ public class evaluation {
         System.out.println("   --Completed");
     }
 
-    public static void parseCSV() {
+    public static void parseCSV(File file) {
         try {
-            //InputStream inputStream = getClass().getClassLoader().getResourceAsStream("response.csv");
-            //BufferReader reader = new BufferedReader(new InputStreamReader(inputStream ));
-            Scanner csvReader = new Scanner(new File(csv_file));
+            Scanner csvReader = new Scanner(file);
 
             // Parsing CSV into Scanner class
-            csvReader.useDelimiter(",");
+            csvReader.useDelimiter(", ");
 
             while (csvReader.hasNext()) {
                 System.out.print(csvReader.next());
             }
 
             csvReader.close();
+            System.out.println("\n");
+
+            // System.out.println("\n");
+
+            // csvReader = new Scanner(teamsCSV);
+            // csvReader.useDelimiter(",");
+            // while (csvReader.hasNext()) {
+            //     System.out.print(csvReader.next());
+            // }
+
+            // csvReader.close();
             
         } catch (Exception e) {
             System.out.println("An error occured.\n");
@@ -207,28 +134,3 @@ public class evaluation {
         }
     }
 }
-
-    // Parse CSV with OpenCSV Library
-    // public static void parseCSV() {
-    //     try {
-    //         // Reads file
-    //         FileReader fileReader = new FileReader(csv_file);
-
-    //         // Creating CSV parser
-    //         CSVReader csvReader = new CSVReaderBuilder(fileReader).withSkipLines(1).build();
-
-    //         // Reads CSV file into list
-    //         List<String[]> csvData = csvReader.readAll();
-
-    //         // Print Contents
-    //         for(String[] row : csvData) {
-    //             for(String cell : row) {
-    //                 System.out.print(cell + "\t");
-    //             }
-    //             System.out.println();
-    //         }
-    //     } catch (Exception e) {
-    //         e.printStackTrace();        }
-    // }
-
-// -----------------------------

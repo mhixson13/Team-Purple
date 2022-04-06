@@ -65,9 +65,6 @@ public class evaluation {
             break;
             } catch (Exception e) {
                 System.out.println("\nYour account or password is incorrect.\n");
-                // e.printStackTrace();
-                // System.err.println(e.getClass().getName()+": "+e.getMessage());
-                // System.exit(0);
                 continue;
             }
         }
@@ -117,16 +114,6 @@ public class evaluation {
 
             csvReader.close();
             System.out.println("\n");
-
-            // System.out.println("\n");
-
-            // csvReader = new Scanner(teamsCSV);
-            // csvReader.useDelimiter(",");
-            // while (csvReader.hasNext()) {
-            //     System.out.print(csvReader.next());
-            // }
-
-            // csvReader.close();
             
         } catch (Exception e) {
             System.out.println("An error occured.\n");

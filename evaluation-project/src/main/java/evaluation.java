@@ -98,13 +98,19 @@ public class evaluation {
         try {
 
         PreparedStatement pstmt = c.prepareStatement(query);
+        System.out.println("PSTMT: " + pstmt);
         rs = pstmt.executeQuery();
+        System.out.println("Rs: " + rs);
         System.out.println("You are in the following team(s): ");
+        String output = "";
 
         while(rs.next()) {
-            System.out.print("-- ");
+            // System.out.print("-- ");
             System.out.println(rs.getString(1));
+            output += rs.getString(1) + "\n";
         }
+
+        System.out.println("Output: \n" + output);
             
         } catch(Exception exec) {
             exec.printStackTrace();

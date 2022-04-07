@@ -64,25 +64,25 @@ create table teams (
     student int
 );
 
--- insert into teams (evalid,teamid,student) values
--- (1,1,1),
--- (1,1,2),
--- (1,1,3),
--- (1,2,4),
--- (1,2,5),
--- (1,2,6),
--- (1,3,7),
--- (1,3,8),
--- (1,3,9),
--- (2,1,2),
--- (2,1,3),
--- (2,1,4),
--- (2,2,5),
--- (2,2,6),
--- (2,2,7),
--- (2,3,8),
--- (2,3,9),
--- (2,3,10);
+insert into teams (evalid,teamid,student) values
+(1,1,1),
+(1,1,2),
+(1,1,3),
+(1,2,4),
+(1,2,5),
+(1,2,6),
+(1,3,7),
+(1,3,8),
+(1,3,9),
+(2,1,2),
+(2,1,3),
+(2,1,4),
+(2,2,5),
+(2,2,6),
+(2,2,7),
+(2,3,8),
+(2,3,9),
+(2,3,10);
 
 drop table response cascade;
 drop table if exists response;
@@ -94,17 +94,17 @@ create table response (
     value int
 );
 
--- insert into response (evalid, student1,student2,category,value) values 
--- (1,1,2,'C',5),
--- (1,1,2,'H',4),
--- (1,1,2,'I',3),
--- (1,1,2,'K',2),
--- (1,1,2,'E',1),
--- (1,1,3,'C',1),
--- (1,1,3,'H',2),
--- (1,1,3,'I',3),
--- (1,1,3,'K',4),
--- (1,1,3,'E',5);
+insert into response (evalid, student1,student2,category,value) values 
+(1,1,2,'C',5),
+(1,1,2,'H',4),
+(1,1,2,'I',3),
+(1,1,2,'K',2),
+(1,1,2,'E',1),
+(1,1,3,'C',1),
+(1,1,3,'H',2),
+(1,1,3,'I',3),
+(1,1,3,'K',4),
+(1,1,3,'E',5);
 
 drop table if exists student;
 create table student (
@@ -134,10 +134,15 @@ insert into student (studentid, student, studentName) values
 ('id18',18,'StudentR'),
 ('id19',19,'StudentS');
 
-select a.studentname, a.studentid, b.teamid, c.category,c.value from student a 
-inner join teams b on b.student = a.student 
-inner join response c on c.student1 = a.student
-order by a.studentname;
+-- select a.studentname, a.studentid, b.teamid, c.category,c.value from student a 
+-- inner join teams b on b.student = a.student 
+-- inner join response c on c.student1 = a.student
+-- order by a.studentname;
+
+select a.studentName, a.studentid, b.teamid
+from student a 
+left join teams b on b.student = a.student
+order by a.studentName;
 
 
 drop table if exists choices;
@@ -366,8 +371,8 @@ create user gbp18a with password 'gbp18a';
 grant connect on database cs375v1 to gbp18a;
 grant select, update, delete on all tables in schema public to gbp18a;
 
-\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
-select * from response;
+--\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
+--select * from response;
 --\copy teams(evalid, teamid, student) from 'evaluation-project/src/resources/teams.csv' delimiter ',' csv header;
 
 select a.class_name as Class, a.class_id as ClassID, b.evalid as Evaluation 
@@ -399,6 +404,9 @@ SELECT * FROM v_response;
 select student2, avg(value) from response group by student2;
 
 select a.studentname, a.studentid, b.teamid from student a inner join teams b on b.student = a.student order by a.studentname;
+
+select distinct a.studentname, a.studentid, teamid from student a
+inner join teams b on b.student = a.student order by a.studentname;
 
 -- Command in psql to read CVS file and insert into tables
 -- copy response(evalid, student1, student2, category, value) from 'C:\Users\Marlon Miller\Desktop\SE2\Team-Purple\evaluation-project\src\resources\response.csv' delimiter ',' csv header;

@@ -623,4 +623,319 @@ public class evaluationTest {
                 e.printStackTrace();
             }
     }
+    
+    @Test
+    public void sql_1() {
+        Connection c = null;
+        ResultSet rs = null;
+        Scanner sc = new Scanner(System.in);
+        String query = "select * from student;";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "mrblee", "purplewhite");
+            
+            PreparedStatement pstmt = c.prepareStatement(query);
+            rs = pstmt.executeQuery();
+            String output = "";
+
+            while(rs.next()) {
+                // System.out.print("-- ");
+                // System.out.println(rs.getString(1));
+                output += rs.getString(1) + "\n";
+            }
+
+            assertEquals("id01\nid02\nid03\nid04\nid05\nid06\nid07\nid08\nid09\nid10\nid11\nid12\nid13\nid14\nid15\nid16\nid17\nid18\nid19\n",output);
+
+            // assertNotNull(c);
+            } catch (Exception e) {
+                System.out.println("sql_1 Test has failed");
+                e.printStackTrace();
+            }
+    }
+
+    @Test
+    public void sql_2() {
+        Connection c = null;
+        ResultSet rs = null;
+        Scanner sc = new Scanner(System.in);
+        String query = "select * from teams;";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "mrblee", "purplewhite");
+            
+            PreparedStatement pstmt = c.prepareStatement(query);
+            rs = pstmt.executeQuery();
+            String output = "";
+
+            while(rs.next()) {
+                // System.out.print("-- ");
+                // System.out.println(rs.getString(1));
+                output += Integer.toString(rs.getInt(1)) + " ";
+                output += Integer.toString(rs.getInt(2)) + " ";
+                output += Integer.toString(rs.getInt(3)) + "\n";
+            }
+
+            assertEquals("1 1 1\n1 1 2\n1 1 3\n1 2 4\n1 2 5\n1 2 6\n1 3 7\n1 3 8\n1 3 9\n2 1 2\n2 1 3\n2 1 4\n2 2 5\n2 2 6\n2 2 7\n2 3 8\n2 3 9\n2 3 10\n",output);
+
+            // assertNotNull(c);
+            } catch (Exception e) {
+                System.out.println("sql_2 Test has failed");
+                e.printStackTrace();
+            }
+    }
+    @Test
+    public void sql_3() {
+        Connection c = null;
+        ResultSet rs = null;
+        Scanner sc = new Scanner(System.in);
+        String query = "select * from users;";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "mrblee", "purplewhite");
+            
+            PreparedStatement pstmt = c.prepareStatement(query);
+            rs = pstmt.executeQuery();
+            String output = "";
+
+            while(rs.next()) {
+                // System.out.print("-- ");
+                // System.out.println(rs.getString(1));
+                output += Integer.toString(rs.getInt(1)) + " ";
+                output += rs.getString(2) + " ";
+                output += rs.getString(3) + " ";
+                output += rs.getString(4) + "\n";
+            }
+
+            assertEquals("100 Marlon Miller mem19b Student\n101 Miranda Hixson mbh18b Student\n102 Julio Lopez jjl18b Student\n103 Brent Reeves mrblee Teacher\n104 Alex Jackson asj18a Student\n105 Justin Raitz jmr18c Student\n106 Brett Hammot bah20a Student\n107 Fischer Coburn fwc17a Student\n108 Mitchel Mellrose wmm18a Student\n109 Luis Ibarra lai19a Student\n110 Christa Greenwood cgg20a Student\n111 Megan Skeen mfs18a Student\n112 Garrett Powell gbp18a Student\n",output);
+
+            // assertNotNull(c);
+            } catch (Exception e) {
+                System.out.println("sql_3 Test has failed");
+                e.printStackTrace();
+            }
+    }
+    @Test
+    public void sql_4() {
+        Connection c = null;
+        ResultSet rs = null;
+        Scanner sc = new Scanner(System.in);
+        String query = "select student2, avg(value) from response group by student2;";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "mrblee", "purplewhite");
+            
+            PreparedStatement pstmt = c.prepareStatement(query);
+            rs = pstmt.executeQuery();
+            String output = "";
+
+            while(rs.next()) {
+                // System.out.print("-- ");
+                // System.out.println(rs.getString(1));
+                output += Integer.toString(rs.getInt(1)) + " ";
+                output += Double.toString(rs.getDouble(2)) + "\n";
+            }
+
+            assertEquals("3 3.0\n2 3.0\n",output);
+
+            // assertNotNull(c);
+            } catch (Exception e) {
+                System.out.println("sql_3 Test has failed");
+                e.printStackTrace();
+            }
+    }
+
+    @Test
+    public void sql_5() {
+        Connection c = null;
+        ResultSet rs = null;
+        Scanner sc = new Scanner(System.in);
+        String query = "select teamid, count(teamid) from teams group by teamid order by teamid;";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "mrblee", "purplewhite");
+            
+            PreparedStatement pstmt = c.prepareStatement(query);
+            rs = pstmt.executeQuery();
+            String output = "";
+
+            while(rs.next()) {
+                // System.out.print("-- ");
+                // System.out.println(rs.getString(1));
+                output += Integer.toString(rs.getInt(1)) + " ";
+                output += Integer.toString(rs.getInt(2)) + "\n";
+            }
+
+            assertEquals("1 6\n2 6\n3 6\n",output);
+
+            // assertNotNull(c);
+            } catch (Exception e) {
+                System.out.println("sql_3 Test has failed");
+                e.printStackTrace();
+            }
+    }
+
+    @Test
+    public void sql_6() {
+        Connection c = null;
+        ResultSet rs = null;
+        Scanner sc = new Scanner(System.in);
+        String query = "select *from response where category = 'C';";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "mrblee", "purplewhite");
+            
+            PreparedStatement pstmt = c.prepareStatement(query);
+            rs = pstmt.executeQuery();
+            String output = "";
+
+            while(rs.next()) {
+                // System.out.print("-- ");
+                // System.out.println(rs.getString(1));
+                output += Integer.toString(rs.getInt(1)) + " ";
+                output += Integer.toString(rs.getInt(2)) + " ";
+                output += Integer.toString(rs.getInt(3)) + " ";
+                output += rs.getString(4) + " ";
+                output += Integer.toString(rs.getInt(5)) + "\n";
+            }
+
+            assertEquals("1 1 2 C 5\n1 1 3 C 1\n",output);
+
+            // assertNotNull(c);
+            } catch (Exception e) {
+                System.out.println("sql_3 Test has failed");
+                e.printStackTrace();
+            }
+    }
+
+    @Test
+    public void sql_7() {
+        Connection c = null;
+        ResultSet rs = null;
+        Scanner sc = new Scanner(System.in);
+        String query = "select avg(value) from response;";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "mrblee", "purplewhite");
+            
+            PreparedStatement pstmt = c.prepareStatement(query);
+            rs = pstmt.executeQuery();
+            String output = "";
+
+            while(rs.next()) {
+                output += Double.toString(rs.getDouble(1)) + "\n";
+            }
+
+            assertEquals("3.0\n",output);
+
+            // assertNotNull(c);
+            } catch (Exception e) {
+                System.out.println("sql_3 Test has failed");
+                e.printStackTrace();
+            }
+    }
+    @Test
+    public void sql_8() {
+        Connection c = null;
+        ResultSet rs = null;
+        Scanner sc = new Scanner(System.in);
+        String query = "select * from section1;";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "mrblee", "purplewhite");
+            
+            PreparedStatement pstmt = c.prepareStatement(query);
+            rs = pstmt.executeQuery();
+            String output = "";
+
+            while(rs.next()) {
+                output += rs.getString(1) + " ";
+                output += rs.getString(2) + "\n";
+            }
+
+            assertEquals("Contributing to the Teams Work Does more or higher-quality work than expected.\nContributing to the Teams Work Makes important contributions that improve the teams work.\nContributing to the Teams Work Helps teammates who are having difficulty completing their work.\nContributing to the Teams Work Demonstrates behaviors described immediately above and below\nContributing to the Teams Work Completes a fair share of the teams work with acceptable quality.\nContributing to the Teams Work Keeps commitments and completes assignments on time.\nContributing to the Teams Work Helps teammates who are having difficulty when it is easy or important.\nContributing to the Teams Work Demonstrates behaviors described immediately above and below.\nContributing to the Teams Work Does not do a fair share of the teams work. Delivers sloppy or incomplete work.\nContributing to the Teams Work Misses deadlines. Is late, unprepared, or absent for team meetings.\nContributing to the Teams Work Does not assist teammates. Quits if the work becomes difficult.\n",output);
+
+            // assertNotNull(c);
+            } catch (Exception e) {
+                System.out.println("sql_3 Test has failed");
+                e.printStackTrace();
+            }
+    }
+
+    @Test
+    public void sql_9() {
+        Connection c = null;
+        ResultSet rs = null;
+        Scanner sc = new Scanner(System.in);
+        String query = "select * from teams where teamid = 2;";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "mrblee", "purplewhite");
+            
+            PreparedStatement pstmt = c.prepareStatement(query);
+            rs = pstmt.executeQuery();
+            String output = "";
+
+            while(rs.next()) {
+                output += Integer.toString(rs.getInt(1)) + " ";
+                output += Integer.toString(rs.getInt(2)) + " ";
+                output += Integer.toString(rs.getInt(3)) + "\n";
+            }
+
+            assertEquals("1 2 4\n1 2 5\n1 2 6\n2 2 5\n2 2 6\n2 2 7\n",output);
+
+            // assertNotNull(c);
+            } catch (Exception e) {
+                System.out.println("sql_3 Test has failed");
+                e.printStackTrace();
+            }
+    }
+
+    @Test
+    public void sql_10() {
+        Connection c = null;
+        ResultSet rs = null;
+        Scanner sc = new Scanner(System.in);
+        String query = "select * from teams where teamid = 3;";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "mrblee", "purplewhite");
+            
+            PreparedStatement pstmt = c.prepareStatement(query);
+            rs = pstmt.executeQuery();
+            String output = "";
+
+            while(rs.next()) {
+                output += Integer.toString(rs.getInt(1)) + " ";
+                output += Integer.toString(rs.getInt(2)) + " ";
+                output += Integer.toString(rs.getInt(3)) + "\n";
+            }
+
+            assertEquals("1 3 7\n1 3 8\n1 3 9\n2 3 8\n2 3 9\n2 3 10\n",output);
+
+            // assertNotNull(c);
+            } catch (Exception e) {
+                System.out.println("sql_3 Test has failed");
+                e.printStackTrace();
+            }
+    }
 }

@@ -10,6 +10,9 @@
     java -cp postgresql-42.3.3.jar evaluation.java
 */
 
+//package org.postgresql.util;
+// package org.postgresql.copy;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner; 
@@ -25,6 +28,18 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
+
+import java.io.BufferedReader;
+//import org.postgresql.core.BaseConnection;
+//import org.postgresql.copy.CopyManager;
+
+// public CopyManager getCopyAPI() throws SQLException {
+//     checkClosed();
+//     if (copyManager == null) {
+//     copyManager = new CopyManager(this);
+//     }
+//     return copyManager;
+// }
 
 public class evaluation {
 
@@ -42,7 +57,8 @@ public class evaluation {
         parseCSV(responseCSV);
         parseCSV(teamsCSV);
 
-        String csv = "\\copy teams(evalid, teamid, student) from 'evaluation-project/src/resources/teams.csv' delimiter ',' csv header;";
+        String csv = "\\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;";
+        System.out.println(csv);
 
         
         System.out.println("\nWelcome to your Peer Evaluation Terminal Interface!");
@@ -62,19 +78,22 @@ public class evaluation {
             Class.forName("org.postgresql.Driver");
             c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
             username, password);
+            System.out.println("Success Message: " + c);
             break;
             } catch (Exception e) {
                 System.out.println("\nYour account or password is incorrect.\n");
+                System.out.println("C: "+ c);
                 continue;
             }
         }
         
         System.out.println("\nWelcome " + username + "!\n");
-       // printEval(c,username);
+        printEval(c,username);
+        //printEvaltwo(c,username);
     }
 
     public static void printEval(Connection c, String username) {
-        String query = "select a.teamname from teams a inner join users b on a.bannerid = b.bannerid where b.username = '" + username  + "';";
+        String query = "select * from student;";
         ResultSet rs = null;
         try {
 
@@ -87,6 +106,23 @@ public class evaluation {
             System.out.println(rs.getString(1));
         }
             
+        } catch(Exception exec) {
+            exec.printStackTrace();
+        }
+    }
+    public static void printEvaltwo(Connection c, String username) {
+        String query = "\\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;";
+        
+        try {
+            // CopyManager mgr = new CopyManager(c);
+            // long rowsaffected  = mgr.copyIn(sql, query);
+            // System.out.println("Rows copied: " + rowsaffected);
+
+            // Statement statement = c.createStatement();
+            // int rows = statement.executeUpdate(query);
+            // if(rows > 0) {
+            //     System.out.println("A new copy statement has been made!");
+            // }
         } catch(Exception exec) {
             exec.printStackTrace();
         }

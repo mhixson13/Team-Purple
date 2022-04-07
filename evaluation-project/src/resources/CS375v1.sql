@@ -56,35 +56,33 @@ insert into users (bannerid, name_, username, acadstatus) values
 (111,'Megan Skeen','mfs18a','Student'),
 (112,'Garrett Powell','gbp18a','Student');
 
+drop table teams cascade;
 drop table if exists teams;
 create table teams (
     evalid int,
     teamid int,
     student int
 );
-/*
-drop table if exists teams;
-create table teams (
-    teamid int,
-    bannerid int,
-    teamname varchar(50)
-);
 
-insert into teams (teamid,bannerid,teamname) values 
-(10,100,'Purple'),
-(10,101,'Purple'),
-(10,102,'Purple'),
-(11,104,'FightFight'),
-(11,105,'FightFight'),
-(11,106,'FightFight'),
-(12,107,'White'),
-(12,108,'White'),
-(12,109,'White'),
-(13,110,'Fight'),
-(13,111,'Fight'),
-(13,112,'Fight'),   
-(14,100,'Blue'),
-(15,100,'Phil Schuberts Team'); */
+-- insert into teams (evalid,teamid,student) values
+-- (1,1,1),
+-- (1,1,2),
+-- (1,1,3),
+-- (1,2,4),
+-- (1,2,5),
+-- (1,2,6),
+-- (1,3,7),
+-- (1,3,8),
+-- (1,3,9),
+-- (2,1,2),
+-- (2,1,3),
+-- (2,1,4),
+-- (2,2,5),
+-- (2,2,6),
+-- (2,2,7),
+-- (2,3,8),
+-- (2,3,9),
+-- (2,3,10);
 
 drop table response cascade;
 drop table if exists response;
@@ -96,6 +94,50 @@ create table response (
     value int
 );
 
+-- insert into response (evalid, student1,student2,category,value) values 
+-- (1,1,2,'C',5),
+-- (1,1,2,'H',4),
+-- (1,1,2,'I',3),
+-- (1,1,2,'K',2),
+-- (1,1,2,'E',1),
+-- (1,1,3,'C',1),
+-- (1,1,3,'H',2),
+-- (1,1,3,'I',3),
+-- (1,1,3,'K',4),
+-- (1,1,3,'E',5);
+
+drop table if exists student;
+create table student (
+    studentid varchar(10),
+    student int,
+    studentName text
+);
+
+insert into student (studentid, student, studentName) values
+('id01',1,'StudentA'),
+('id02',2,'StudentB'),
+('id03',3,'StudentC'),
+('id04',4,'StudentD'),
+('id05',5,'StudentE'),
+('id06',6,'StudentF'),
+('id07',7,'StudentG'),
+('id08',8,'StudentH'),
+('id09',9,'StudentI'),
+('id10',10,'StudentJ'),
+('id11',11,'StudentK'),
+('id12',12,'StudentL'),
+('id13',13,'StudentM'),
+('id14',14,'StudentN'),
+('id15',15,'StudentO'),
+('id16',16,'StudentP'),
+('id17',17,'StudentQ'),
+('id18',18,'StudentR'),
+('id19',19,'StudentS');
+
+select a.studentname, a.studentid, b.teamid, c.category,c.value from student a 
+inner join teams b on b.student = a.student 
+inner join response c on c.student1 = a.student
+order by a.studentname;
 
 
 drop table if exists choices;
@@ -144,21 +186,6 @@ insert into class (class_id, class_name) values
 (2002,'Programming Languages'),
 (3003,'Advanced Bible'),
 (4004,'2D Animation');
-
-/*
-drop table response cascade;
-create table response(
-    evalid int primary key, 
-    student1 int, 
-    student2 int, 
-    category char(3), 
-    value int
-);
-
-insert into response (evalid, student1, student2, category, value) values
-(1,1,2,'POS',5),
-(2,2,3,'NEU',3),
-(3,3,4,'NEG',1); */
 
 drop table if exists Section1;
 create table Section1(
@@ -339,8 +366,9 @@ create user gbp18a with password 'gbp18a';
 grant connect on database cs375v1 to gbp18a;
 grant select, update, delete on all tables in schema public to gbp18a;
 
-\copy response(evalid, student1, student2, category, value) from 'evaluation-project/src/resources/response.csv' delimiter ',' csv header;
-\copy teams(evalid, teamid, student) from 'evaluation-project/src/resources/teams.csv' delimiter ',' csv header;
+\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
+select * from response;
+--\copy teams(evalid, teamid, student) from 'evaluation-project/src/resources/teams.csv' delimiter ',' csv header;
 
 select a.class_name as Class, a.class_id as ClassID, b.evalid as Evaluation 
 from class a join evaluation b on b.class_id = a.class_id order by a.class_name;
@@ -355,11 +383,13 @@ join choices b on a.question_type = b.question_type;
 
 SELECT * FROM Section1;
 
+drop view if exists v_teams;
 create view v_teams as 
 select * from teams;
 
 select * from v_teams;
 
+drop view if exists v_response;
 CREATE VIEW v_response AS
 SELECT *
 FROM response;
@@ -367,6 +397,8 @@ FROM response;
 SELECT * FROM v_response; 
 
 select student2, avg(value) from response group by student2;
+
+select a.studentname, a.studentid, b.teamid from student a inner join teams b on b.student = a.student order by a.studentname;
 
 -- Command in psql to read CVS file and insert into tables
 -- copy response(evalid, student1, student2, category, value) from 'C:\Users\Marlon Miller\Desktop\SE2\Team-Purple\evaluation-project\src\resources\response.csv' delimiter ',' csv header;

@@ -1,4 +1,5 @@
 --  \i 'C:/Users/Marlon Miller/Desktop/SE2/Team-Purple/evaluation-project/src/resources/CS375v1.sql'
+--  \i 'C:/SE2/Team-Purple/evaluation-project/src/resources/CS375v1.sql'
 
 -- CS375v1 Database Property of Purple
 -- Members: Marlon Miller, Julio Lopez, Miranda Hixson
@@ -407,6 +408,43 @@ select a.studentname, a.studentid, b.teamid from student a inner join teams b on
 
 select distinct a.studentname, a.studentid, teamid from student a
 inner join teams b on b.student = a.student order by a.studentname;
+
+select * from response;
+
+create view v_response_team as select r.evalid as eval, r.student1 as s1, 
+r.student2 as s2, r.category as cat, r.value as v, t.teamid as team
+from response r
+inner join teams t on (t.student = r.student1)
+order by r.evalid, r.student1, r.student2, r.category;
+
+select * from v_response_team order by eval, s1, s2, cat limit 20;
+
+-- avg C for class
+select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'C';
+
+-- avg H for class
+select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'H';
+
+-- avg I for class
+select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'I';
+
+-- avg K for class
+select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'K';
+
+-- avg E for class
+select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'E';
+
+-- avg of student ratings including self
+select eval, team, s2, count(v) n, avg(v) avg from v_response_team where team < 3 
+group by eval, team, s2 order by team, s2;
+
+-- avg of student ratings excluding self
+select eval, team, s2, count(v) n, avg(v) avg from v_response_team where s1 != s2 
+and team < 3 group by eval, team, s2 order by team, s2;
+
+-- team 1
+select eval, team, s2, count(v) n, avg(v) avg from v_response_team where team = 1 
+group by eval, team, s2 order by team, s2;
 
 -- Command in psql to read CVS file and insert into tables
 -- copy response(evalid, student1, student2, category, value) from 'C:\Users\Marlon Miller\Desktop\SE2\Team-Purple\evaluation-project\src\resources\response.csv' delimiter ',' csv header;

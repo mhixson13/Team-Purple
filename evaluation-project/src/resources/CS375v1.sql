@@ -420,19 +420,24 @@ order by r.evalid, r.student1, r.student2, r.category;
 select * from v_response_team order by eval, s1, s2, cat limit 20;
 
 -- avg C for class
-select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'C';
+select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'C' 
+group by cat, eval, team;
 
 -- avg H for class
-select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'H';
+select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'H'
+group by cat, eval, team;
 
 -- avg I for class
-select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'I';
+select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'I'
+group by cat, eval, team;
 
 -- avg K for class
-select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'K';
+select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'K'
+group by cat, eval, team;
 
 -- avg E for class
-select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'E';
+select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'E'
+group by cat, eval, team;
 
 -- avg of student ratings including self
 select eval, team, s2, count(v) n, avg(v) avg from v_response_team where team < 3 

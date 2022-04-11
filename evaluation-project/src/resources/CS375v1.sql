@@ -65,25 +65,25 @@ create table teams (
     student int
 );
 
-insert into teams (evalid,teamid,student) values
-(1,1,1),
-(1,1,2),
-(1,1,3),
-(1,2,4),
-(1,2,5),
-(1,2,6),
-(1,3,7),
-(1,3,8),
-(1,3,9),
-(2,1,2),
-(2,1,3),
-(2,1,4),
-(2,2,5),
-(2,2,6),
-(2,2,7),
-(2,3,8),
-(2,3,9),
-(2,3,10);
+-- insert into teams (evalid,teamid,student) values
+-- (1,1,1),
+-- (1,1,2),
+-- (1,1,3),
+-- (1,2,4),
+-- (1,2,5),
+-- (1,2,6),
+-- (1,3,7),
+-- (1,3,8),
+-- (1,3,9),
+-- (2,1,2),
+-- (2,1,3),
+-- (2,1,4),
+-- (2,2,5),
+-- (2,2,6),
+-- (2,2,7),
+-- (2,3,8),
+-- (2,3,9),
+-- (2,3,10);
 
 drop table response cascade;
 drop table if exists response;
@@ -95,17 +95,17 @@ create table response (
     value int
 );
 
-insert into response (evalid, student1,student2,category,value) values 
-(1,1,2,'C',5),
-(1,1,2,'H',4),
-(1,1,2,'I',3),
-(1,1,2,'K',2),
-(1,1,2,'E',1),
-(1,1,3,'C',1),
-(1,1,3,'H',2),
-(1,1,3,'I',3),
-(1,1,3,'K',4),
-(1,1,3,'E',5);
+-- insert into response (evalid, student1,student2,category,value) values 
+-- (1,1,2,'C',5),
+-- (1,1,2,'H',4),
+-- (1,1,2,'I',3),
+-- (1,1,2,'K',2),
+-- (1,1,2,'E',1),
+-- (1,1,3,'C',1),
+-- (1,1,3,'H',2),
+-- (1,1,3,'I',3),
+-- (1,1,3,'K',4),
+-- (1,1,3,'E',5);
 
 drop table if exists student;
 create table student (
@@ -451,5 +451,9 @@ and team < 3 group by eval, team, s2 order by team, s2;
 select eval, team, s2, count(v) n, avg(v) avg from v_response_team where team = 1 
 group by eval, team, s2 order by team, s2;
 
+\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
+\copy teams(evalid, teamid, student) from '../../resources/teams.csv' delimiter ',' csv header;
+
+--  \i 'C:/Users/Marlon Miller/Desktop/SE2/Team-Purple/evaluation-project/src/resources/CS375v1.sql'
 -- Command in psql to read CVS file and insert into tables
 -- copy response(evalid, student1, student2, category, value) from 'C:\Users\Marlon Miller\Desktop\SE2\Team-Purple\evaluation-project\src\resources\response.csv' delimiter ',' csv header;

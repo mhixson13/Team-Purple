@@ -692,7 +692,7 @@ public class evaluationTest {
         Connection c = null;
         ResultSet rs = null;
         Scanner sc = new Scanner(System.in);
-        String query = "select * from response limit 10;";
+        String query = "select count(*) from response where student1 = 3";
 
         try {
             Class.forName("org.postgresql.Driver");
@@ -707,12 +707,12 @@ public class evaluationTest {
                 // System.out.print("-- ");
                 // System.out.println(rs.getString(1));
                 output += Integer.toString(rs.getInt(1)) + " ";
-                output += rs.getString(2) + " ";
-                output += rs.getString(3) + " ";
-                output += rs.getString(4) + "\n";
+                // output += rs.getString(2) + " ";
+                // output += rs.getString(3) + " ";
+                // output += rs.getString(4) + "\n";
             }
 
-            assertEquals("1 1 1 'C'\n1 1 1 'I'\n1 1 1 'K'\n1 1 1 'E'\n1 1 1 'H'\n1 1 2 'C'\n1 1 2 'I'\n1 1 2 'K'\n1 1 2 'E'\n1 1 2 'H'\n",output);
+            assertEquals("15 ",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -789,7 +789,7 @@ public class evaluationTest {
         Connection c = null;
         ResultSet rs = null;
         Scanner sc = new Scanner(System.in);
-        String query = "select * from response where student1 = 1;";
+        String query = "select count(*) from teams;";
 
         try {
             Class.forName("org.postgresql.Driver");
@@ -804,13 +804,13 @@ public class evaluationTest {
                 // System.out.print("-- ");
                 // System.out.println(rs.getString(1));
                 output += Integer.toString(rs.getInt(1)) + " ";
-                output += Integer.toString(rs.getInt(2)) + " ";
-                output += Integer.toString(rs.getInt(3)) + " ";
-                output += rs.getString(4) + " ";
-                output += Integer.toString(rs.getInt(5)) + "\n";
+                // output += Integer.toString(rs.getInt(2)) + " ";
+                // output += Integer.toString(rs.getInt(3)) + " ";
+                // output += rs.getString(4) + " ";
+                // output += Integer.toString(rs.getInt(5)) + "\n";
             }
 
-            assertEquals("1 1 1 'C' 3\n1 1 1 'I' 3\n1 1 1 'K' 3\n1 1 1 'E' 3\n1 1 1 'H' 3\n1 1 2 'C' 4\n1 1 2 'I' 4\n1 1 2 'K' 4\n1 1 2 'E' 4\n1 1 2 'H' 4\n1 1 3 'C' 5\n1 1 3 'I' 5\n1 1 3 'K' 5\n1 1 3 'E' 5\n1 1 3 'H' 5\n",output);
+            assertEquals("19 ",output);
 
             // assertNotNull(c);
             } catch (Exception e) {

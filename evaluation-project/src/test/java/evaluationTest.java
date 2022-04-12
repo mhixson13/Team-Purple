@@ -679,7 +679,7 @@ public class evaluationTest {
                 output += Integer.toString(rs.getInt(3)) + "\n";
             }
 
-            assertEquals("1 1 1\n1 1 2\n1 1 3\n1 2 4\n1 2 5\n1 2 6\n1 3 7\n1 3 8\n1 3 9\n2 1 2\n2 1 3\n2 1 4\n2 2 5\n2 2 6\n2 2 7\n2 3 8\n2 3 9\n2 3 10\n",output);
+            assertEquals("1 1 1\n1 1 2\n1 1 3\n1 2 4\n1 2 5\n1 2 6\n1 3 7\n1 3 8\n1 3 9\n1 4 10\n1 4 11\n1 4 12\n1 5 13\n1 5 14\n1 5 15\n1 6 16\n1 6 17\n1 7 18\n1 7 19\n",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -692,7 +692,7 @@ public class evaluationTest {
         Connection c = null;
         ResultSet rs = null;
         Scanner sc = new Scanner(System.in);
-        String query = "select * from users;";
+        String query = "select * from response limit 10;";
 
         try {
             Class.forName("org.postgresql.Driver");
@@ -712,7 +712,7 @@ public class evaluationTest {
                 output += rs.getString(4) + "\n";
             }
 
-            assertEquals("100 Marlon Miller mem19b Student\n101 Miranda Hixson mbh18b Student\n102 Julio Lopez jjl18b Student\n103 Brent Reeves mrblee Teacher\n104 Alex Jackson asj18a Student\n105 Justin Raitz jmr18c Student\n106 Brett Hammot bah20a Student\n107 Fischer Coburn fwc17a Student\n108 Mitchel Mellrose wmm18a Student\n109 Luis Ibarra lai19a Student\n110 Christa Greenwood cgg20a Student\n111 Megan Skeen mfs18a Student\n112 Garrett Powell gbp18a Student\n",output);
+            assertEquals("1 1 1 'C'\n1 1 1 'I'\n1 1 1 'K'\n1 1 1 'E'\n1 1 1 'H'\n1 1 2 'C'\n1 1 2 'I'\n1 1 2 'K'\n1 1 2 'E'\n1 1 2 'H'\n",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -725,7 +725,7 @@ public class evaluationTest {
         Connection c = null;
         ResultSet rs = null;
         Scanner sc = new Scanner(System.in);
-        String query = "select student2, avg(value) from response group by student2;";
+        String query = "select count(*) from response;";
 
         try {
             Class.forName("org.postgresql.Driver");
@@ -740,10 +740,10 @@ public class evaluationTest {
                 // System.out.print("-- ");
                 // System.out.println(rs.getString(1));
                 output += Integer.toString(rs.getInt(1)) + " ";
-                output += Double.toString(rs.getDouble(2)) + "\n";
+                //output += Double.toString(rs.getDouble(2)) + "\n";
             }
 
-            assertEquals("3 3.0\n2 3.0\n",output);
+            assertEquals("265 ",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -775,7 +775,7 @@ public class evaluationTest {
                 output += Integer.toString(rs.getInt(2)) + "\n";
             }
 
-            assertEquals("1 6\n2 6\n3 6\n",output);
+            assertEquals("1 3\n2 3\n3 3\n4 3\n5 3\n6 2\n7 2\n",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -789,7 +789,7 @@ public class evaluationTest {
         Connection c = null;
         ResultSet rs = null;
         Scanner sc = new Scanner(System.in);
-        String query = "select *from response where category = 'C';";
+        String query = "select * from response where student1 = 1;";
 
         try {
             Class.forName("org.postgresql.Driver");
@@ -810,7 +810,7 @@ public class evaluationTest {
                 output += Integer.toString(rs.getInt(5)) + "\n";
             }
 
-            assertEquals("1 1 2 C 5\n1 1 3 C 1\n",output);
+            assertEquals("1 1 1 'C' 3\n1 1 1 'I' 3\n1 1 1 'K' 3\n1 1 1 'E' 3\n1 1 1 'H' 3\n1 1 2 'C' 4\n1 1 2 'I' 4\n1 1 2 'K' 4\n1 1 2 'E' 4\n1 1 2 'H' 4\n1 1 3 'C' 5\n1 1 3 'I' 5\n1 1 3 'K' 5\n1 1 3 'E' 5\n1 1 3 'H' 5\n",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -839,7 +839,7 @@ public class evaluationTest {
                 output += Double.toString(rs.getDouble(1)) + "\n";
             }
 
-            assertEquals("3.0\n",output);
+            assertEquals("3.9547169811320755\n",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -852,7 +852,7 @@ public class evaluationTest {
         Connection c = null;
         ResultSet rs = null;
         Scanner sc = new Scanner(System.in);
-        String query = "select * from section1;";
+        String query = "select * from teams where student = 2;";
 
         try {
             Class.forName("org.postgresql.Driver");
@@ -868,7 +868,7 @@ public class evaluationTest {
                 output += rs.getString(2) + "\n";
             }
 
-            assertEquals("Contributing to the Teams Work Does more or higher-quality work than expected.\nContributing to the Teams Work Makes important contributions that improve the teams work.\nContributing to the Teams Work Helps teammates who are having difficulty completing their work.\nContributing to the Teams Work Demonstrates behaviors described immediately above and below\nContributing to the Teams Work Completes a fair share of the teams work with acceptable quality.\nContributing to the Teams Work Keeps commitments and completes assignments on time.\nContributing to the Teams Work Helps teammates who are having difficulty when it is easy or important.\nContributing to the Teams Work Demonstrates behaviors described immediately above and below.\nContributing to the Teams Work Does not do a fair share of the teams work. Delivers sloppy or incomplete work.\nContributing to the Teams Work Misses deadlines. Is late, unprepared, or absent for team meetings.\nContributing to the Teams Work Does not assist teammates. Quits if the work becomes difficult.\n",output);
+            assertEquals("1 1\n",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -899,7 +899,7 @@ public class evaluationTest {
                 output += Integer.toString(rs.getInt(3)) + "\n";
             }
 
-            assertEquals("1 2 4\n1 2 5\n1 2 6\n2 2 5\n2 2 6\n2 2 7\n",output);
+            assertEquals("1 2 4\n1 2 5\n1 2 6\n",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -930,7 +930,7 @@ public class evaluationTest {
                 output += Integer.toString(rs.getInt(3)) + "\n";
             }
 
-            assertEquals("1 3 7\n1 3 8\n1 3 9\n2 3 8\n2 3 9\n2 3 10\n",output);
+            assertEquals("1 3 7\n1 3 8\n1 3 9\n",output);
 
             // assertNotNull(c);
             } catch (Exception e) {

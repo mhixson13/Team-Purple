@@ -130,14 +130,6 @@ public class evaluation {
     }
 
     // -------------------------------------
-
-    public static void options() {
-        System.out.println("\nOptions:");
-        System.out.println("   --Peer_Evaluations");
-        System.out.println("   --Missing");
-        System.out.println("   --Completed");
-    }
-
     public static String parseCSV(File file, String filename) {
         try {
             //Scanner csvReader = new Scanner(file);

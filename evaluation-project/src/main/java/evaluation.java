@@ -81,13 +81,6 @@ public class evaluation {
             insertCSV(c,results);
             insertCSV(c,teams);
         }
-
-        
-
-        //statement.executeUpdate(query);
-        
-        // printEval(c,username);
-        //printEvaltwo(c,username);
     }
 
     public static void printEval(Connection c, String username) {

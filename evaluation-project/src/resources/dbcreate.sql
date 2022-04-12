@@ -376,8 +376,8 @@ grant select, update, delete on all tables in schema public to gbp18a;
 --select * from response;
 --\copy teams(evalid, teamid, student) from 'evaluation-project/src/resources/teams.csv' delimiter ',' csv header;
 
---\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
---\copy teams(evalid, teamid, student) from '../../resources/teams.csv' delimiter ',' csv header;
+\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
+\copy teams(evalid, teamid, student) from '../../resources/teams.csv' delimiter ',' csv header;
 
 drop view if exists v_response_avg;
 create view v_response_avg as
@@ -394,27 +394,27 @@ select * from v_response_cat_avg;
 
 drop view if exists v_response_C;
 create view v_response_C as
-select * from v_response_cat_avg where cat = 'C';
+select * from v_response_cat_avg where cat like '%C%';
 select * from v_response_C;
 
 drop view if exists v_response_H;
 create view v_response_H as
-select * from v_response_cat_avg where cat = 'H';
+select * from v_response_cat_avg where cat like '%H%';
 select * from v_response_H;
 
 drop view if exists v_response_E;
 create view v_response_E as
-select * from v_response_cat_avg where cat = 'E';
+select * from v_response_cat_avg where cat like '%E%';
 select * from v_response_E;
 
 drop view if exists v_response_I;
 create view v_response_I as
-select * from v_response_cat_avg where cat = 'I';
+select * from v_response_cat_avg where cat like '%I%';
 select * from v_response_I;
 
 drop view if exists v_response_K;
 create view v_response_K as
-select * from v_response_cat_avg where cat = 'K';
+select * from v_response_cat_avg where cat like '%K%';
 select * from v_response_K;
 
 -- select a.class_name as Class, a.class_id as ClassID, b.evalid as Evaluation 

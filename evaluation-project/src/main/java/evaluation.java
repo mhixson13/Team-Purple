@@ -10,15 +10,12 @@
     java -cp postgresql-42.3.3.jar evaluation.java
 */
 
-//package org.postgresql.util;
-// package org.postgresql.copy;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner; 
 import java.io.IOException;
 import java.util.*;
-//import com.opencsv.*;
+
 import java.io.*;
 
 import java.sql.Connection;
@@ -30,16 +27,6 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 import java.io.BufferedReader;
-//import org.postgresql.core.BaseConnection;
-//import org.postgresql.copy.CopyManager;
-
-// public CopyManager getCopyAPI() throws SQLException {
-//     checkClosed();
-//     if (copyManager == null) {
-//     copyManager = new CopyManager(this);
-//     }
-//     return copyManager;
-// }
 
 public class evaluation {
 
@@ -54,11 +41,8 @@ public class evaluation {
         File responseCSV = new File("..\\..\\resources\\response.csv");
         File teamsCSV = new File("..\\..\\resources\\teams.csv"); 
 
-        parseCSV(responseCSV);
-        parseCSV(teamsCSV);
-
-        String csv = "\\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;";
-        System.out.println(csv);
+        //String csv = "\\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;";
+        //System.out.println(csv);
 
         
         System.out.println("\nWelcome to your Peer Evaluation Terminal Interface!");
@@ -68,6 +52,9 @@ public class evaluation {
         System.out.println(" *UML Diagrams:                    https://github.com/mhixson13/Team-Purple/tree/main/uml");
         System.out.println(" *More:                            https://github.com/mhixson13/Team-Purple\n");
 
+        String results = parseCSV(responseCSV, "response");
+        String teams = parseCSV(teamsCSV, "teams");
+
         while(true) {
             System.out.print("Username: ");
             username = sc.nextLine();
@@ -75,20 +62,25 @@ public class evaluation {
             String password = sc.nextLine();
 
             try {
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
-            username, password);
-            System.out.println("Success Message: " + c);
-            break;
+                Class.forName("org.postgresql.Driver");
+                c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+                username, password);
+                //System.out.println("Success Message: " + c);
+                break;
             } catch (Exception e) {
                 System.out.println("\nYour account or password is incorrect.\n");
                 System.out.println("C: "+ c);
                 continue;
             }
         }
-        
+
+        System.out.println("\n");
+        insertCSV(c,results);
+        insertCSV(c,teams);
+
+        //statement.executeUpdate(query);
         System.out.println("\nWelcome " + username + "!\n");
-        printEval(c,username);
+        // printEval(c,username);
         //printEvaltwo(c,username);
     }
 
@@ -116,21 +108,18 @@ public class evaluation {
             exec.printStackTrace();
         }
     }
-    public static void printEvaltwo(Connection c, String username) {
-        String query = "\\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;";
-        
+    public static void insertCSV(Connection c, String query) {
         try {
-            // CopyManager mgr = new CopyManager(c);
-            // long rowsaffected  = mgr.copyIn(sql, query);
-            // System.out.println("Rows copied: " + rowsaffected);
-
-            // Statement statement = c.createStatement();
-            // int rows = statement.executeUpdate(query);
-            // if(rows > 0) {
-            //     System.out.println("A new copy statement has been made!");
-            // }
-        } catch(Exception exec) {
-            exec.printStackTrace();
+            //System.out.println(query);
+            Statement statement = c.createStatement();
+            int rows = statement.executeUpdate(query);
+            
+            if(rows > 0) {
+                System.out.println("Statement inserted.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error inside insertion");
         }
     }
 
@@ -143,23 +132,37 @@ public class evaluation {
         System.out.println("   --Completed");
     }
 
-    public static void parseCSV(File file) {
+    public static String parseCSV(File file, String filename) {
         try {
-            Scanner csvReader = new Scanner(file);
+            //Scanner csvReader = new Scanner(file);
+            Scanner scanner = new Scanner(file);
+            String line = scanner.nextLine();
+            String query = "insert into " + filename + "(" + line + ") values ";
 
-            // Parsing CSV into Scanner class
-            csvReader.useDelimiter(", ");
-
-            while (csvReader.hasNext()) {
-                System.out.print(csvReader.next());
+            while(scanner.hasNextLine()) {
+                query += "(" + scanner.nextLine() + "),";
             }
 
-            csvReader.close();
-            System.out.println("\n");
+            query = query.substring(0,query.length()-1);
+            query += ";";
+
+            //System.out.println(query);
+
+            // String firstColumn = csvReader.nextLine() + "Typed this";
+            //System.out.println(firstColumn);
+
+            // while (csvReader.hasNext()) {
+            //     System.out.print(csvReader.next());
+            // }
+
+            scanner.close();
+            //System.out.println("\n");
+            return query;
             
         } catch (Exception e) {
             System.out.println("An error occured.\n");
             e.printStackTrace();
         }
+        return "";
     }
 }

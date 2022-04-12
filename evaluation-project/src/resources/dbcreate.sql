@@ -376,8 +376,8 @@ grant select, update, delete on all tables in schema public to gbp18a;
 --select * from response;
 --\copy teams(evalid, teamid, student) from 'evaluation-project/src/resources/teams.csv' delimiter ',' csv header;
 
-\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
-\copy teams(evalid, teamid, student) from '../../resources/teams.csv' delimiter ',' csv header;
+--\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
+--\copy teams(evalid, teamid, student) from '../../resources/teams.csv' delimiter ',' csv header;
 
 drop view if exists v_response_avg;
 create view v_response_avg as
@@ -492,6 +492,6 @@ select * from v_response_K;
 -- select eval, team, s2, count(v) n, avg(v) avg from v_response_team where team = 1 
 -- group by eval, team, s2 order by team, s2;
 
---  \i 'C:/Users/Marlon Miller/Desktop/SE2/Team-Purple/evaluation-project/src/resources/CS375v1.sql'
+--  \i 'C:/Users/Marlon Miller/Desktop/SE2/Team-Purple/evaluation-project/src/resources/dbcreate.sql'
 -- Command in psql to read CVS file and insert into tables
 -- copy response(evalid, student1, student2, category, value) from 'C:\Users\Marlon Miller\Desktop\SE2\Team-Purple\evaluation-project\src\resources\response.csv' delimiter ',' csv header;

@@ -75,12 +75,13 @@ public class evaluation {
         }
 
         System.out.println("\nWelcome " + username + "!\n");
-        System.out.print("Do you wish to insert .csv files? (Y/N) ");
-        String answer = sc.nextLine();
-        if(answer == "Y") {
-            insertCSV(c,results);
-            insertCSV(c,teams);
-        }
+        //System.out.print("Do you wish to insert .csv files? (Y/N) ");
+        //String answer = sc.nextLine();
+
+        //System.out.println(results);
+        //System.out.println("\n" + teams);
+        insertCSV(c,results);
+        insertCSV(c,teams);
     }
 
     public static void printEval(Connection c, String username) {
@@ -112,9 +113,10 @@ public class evaluation {
             //System.out.println(query);
             Statement statement = c.createStatement();
             int rows = statement.executeUpdate(query);
+            System.out.println("Statement was inserted");
             
             if(rows > 0) {
-                System.out.println("Statement inserted.");
+                System.out.println("Statement inserted.\n");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -123,12 +125,20 @@ public class evaluation {
     }
 
     // -------------------------------------
-    public static String parseCSV(File file, String filename) {
+    public static String parseCSV(File file, String tableName) {
         try {
             //Scanner csvReader = new Scanner(file);
             Scanner scanner = new Scanner(file);
             String line = scanner.nextLine();
-            String query = "insert into " + filename + "(" + line + ") values ";
+            String droptable = "drop table " + tableName + " cascade; " + "create table " + tableName;
+            if(tableName == "response") {
+                droptable += " (evalid int, student1 int, student2 int, category varchar(10), value int );"; 
+            } 
+            else {
+                droptable += " (evalid int, teamid int,student int );";
+            }
+            
+            String query = droptable + " insert into " + tableName + "(" + line + ") values ";
 
             while(scanner.hasNextLine()) {
                 query += "(" + scanner.nextLine() + "),";

@@ -376,8 +376,8 @@ grant select, update, delete on all tables in schema public to gbp18a;
 --select * from response;
 --\copy teams(evalid, teamid, student) from 'evaluation-project/src/resources/teams.csv' delimiter ',' csv header;
 
---\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
---\copy teams(evalid, teamid, student) from '../../resources/teams.csv' delimiter ',' csv header;
+\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
+\copy teams(evalid, teamid, student) from '../../resources/teams.csv' delimiter ',' csv header;
 
 drop view if exists v_response_avg;
 create view v_response_avg as

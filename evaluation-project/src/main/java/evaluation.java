@@ -74,12 +74,18 @@ public class evaluation {
             }
         }
 
-        System.out.println("\n");
-        insertCSV(c,results);
-        insertCSV(c,teams);
+        System.out.println("\nWelcome " + username + "!\n");
+        System.out.print("Do you wish to insert .csv files? (Y/N) ");
+        String answer = sc.nextLine();
+        if(answer == "Y") {
+            insertCSV(c,results);
+            insertCSV(c,teams);
+        }
+
+        
 
         //statement.executeUpdate(query);
-        System.out.println("\nWelcome " + username + "!\n");
+        
         // printEval(c,username);
         //printEvaltwo(c,username);
     }

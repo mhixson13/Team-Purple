@@ -75,13 +75,16 @@ public class evaluation {
         }
 
         System.out.println("\nWelcome " + username + "!\n");
-        //System.out.print("Do you wish to insert .csv files? (Y/N) ");
-        //String answer = sc.nextLine();
-
+        System.out.print("Do you wish to insert .csv files? (Y/N) ");
+        String answer = sc.nextLine();
+        // if(answer == "Y") {
+        //     insertCSV(c,results);
+        //     insertCSV(c,teams);
+        // }
+ 
         //System.out.println(results);
         //System.out.println("\n" + teams);
-        insertCSV(c,results);
-        insertCSV(c,teams);
+        
     }
 
     public static void printEval(Connection c, String username) {

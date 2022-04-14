@@ -679,8 +679,8 @@ public class evaluationTest {
                 output += Integer.toString(rs.getInt(3)) + "\n";
             }
 
-            assertEquals("1 1 1\n1 1 2\n1 1 3\n1 2 4\n1 2 5\n1 2 6\n1 3 7\n1 3 8\n1 3 9\n1 4 10\n1 4 11\n1 4 12\n1 5 13\n1 5 14\n1 5 15\n1 6 16\n1 6 17\n1 7 18\n1 7 19\n",output);
-
+            assertEquals("1 1 1\n1 1 2\n1 1 3\n1 2 4\n1 2 5\n1 2 6\n1 3 7\n1 3 8\n1 3 9\n2 1 2\n2 1 3\n2 1 4\n2 2 5\n2 2 6\n2 2 7\n2 3 8\n2 3 9\n2 3 10\n",output);
+            //1 1 1\n1 1 2\n1 1 3\n1 2 4\n1 2 5\n1 2 6\n1 3 7\n1 3 8\n1 3 9\n1 4 10\n1 4 11\n1 4 12\n1 5 13\n1 5 14\n1 5 15\n1 6 16\n1 6 17\n1 7 18\n1 7 19\n
             // assertNotNull(c);
             } catch (Exception e) {
                 System.out.println("sql_2 Test has failed");
@@ -775,7 +775,7 @@ public class evaluationTest {
                 output += Integer.toString(rs.getInt(2)) + "\n";
             }
 
-            assertEquals("1 3\n2 3\n3 3\n4 3\n5 3\n6 2\n7 2\n",output);
+            assertEquals("1 6\n2 6\n3 6\n",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -810,7 +810,7 @@ public class evaluationTest {
                 // output += Integer.toString(rs.getInt(5)) + "\n";
             }
 
-            assertEquals("19 ",output);
+            assertEquals("18 ",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -868,7 +868,7 @@ public class evaluationTest {
                 output += rs.getString(2) + "\n";
             }
 
-            assertEquals("1 1\n",output);
+            assertEquals("1 1\n2 1\n",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -899,7 +899,7 @@ public class evaluationTest {
                 output += Integer.toString(rs.getInt(3)) + "\n";
             }
 
-            assertEquals("1 2 4\n1 2 5\n1 2 6\n",output);
+            assertEquals("1 2 4\n1 2 5\n1 2 6\n2 2 5\n2 2 6\n2 2 7\n",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -930,7 +930,7 @@ public class evaluationTest {
                 output += Integer.toString(rs.getInt(3)) + "\n";
             }
 
-            assertEquals("1 3 7\n1 3 8\n1 3 9\n",output);
+            assertEquals("1 3 7\n1 3 8\n1 3 9\n2 3 8\n2 3 9\n2 3 10\n",output);
 
             // assertNotNull(c);
             } catch (Exception e) {

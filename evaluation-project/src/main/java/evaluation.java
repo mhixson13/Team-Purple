@@ -69,22 +69,45 @@ public class evaluation {
                 break;
             } catch (Exception e) {
                 System.out.println("\nYour account or password is incorrect.\n");
-                System.out.println("C: "+ c);
+                //System.out.println("C: "+ c);
                 continue;
             }
         }
 
-        System.out.println("\nWelcome " + username + "!\n");
-        System.out.print("Do you wish to insert .csv files? (Y/N) ");
-        String answer = sc.nextLine();
-        // if(answer == "Y") {
-        //     insertCSV(c,results);
-        //     insertCSV(c,teams);
-        // }
- 
-        //System.out.println(results);
-        //System.out.println("\n" + teams);
+        System.out.println("\nWelcome " + username + "!");
+        File allFiles = new File("..\\..\\resources");
+        FilenameFilter filter = new FilenameFilter() {
+            @Override
+            public boolean accept(File f, String name) {
+                return name.endsWith(".csv");
+            }
+        };
+        String[] pathnames = allFiles.list(filter);
+
+        String answer = "";
+        while(true) {
+            System.out.print("Do you wish to insert .csv files? (Y/N) ");
+            answer = sc.nextLine();
+            if(answer.equals("Y") || answer.equals("N"))
+                break;
+            System.out.println("Wrong input. Try again.");
+            answer = sc.nextLine();
+        }
         
+
+        System.out.println("\nFiles:");
+        for(String pathname : pathnames)
+            System.out.println("*" + pathname);
+
+        System.out.print("\n");
+        while(true) {
+            System.out.print("Choose your file: ");
+            String choice = sc.nextLine();
+            break;
+        }
+
+        
+        insertCSV(c,teams);
     }
 
     public static void printEval(Connection c, String username) {
@@ -122,26 +145,19 @@ public class evaluation {
                 System.out.println("Statement inserted.\n");
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error inside insertion");
+            //e.printStackTrace();
+            System.out.println("Your CSV file contains information already in our database.");
+            System.out.println("Please check your file data.");
+            //System.out.println("Error inside insertion");
         }
     }
 
     // -------------------------------------
     public static String parseCSV(File file, String tableName) {
         try {
-            //Scanner csvReader = new Scanner(file);
             Scanner scanner = new Scanner(file);
             String line = scanner.nextLine();
-            String droptable = "drop table " + tableName + " cascade; " + "create table " + tableName;
-            if(tableName == "response") {
-                droptable += " (evalid int, student1 int, student2 int, category varchar(10), value int );"; 
-            } 
-            else {
-                droptable += " (evalid int, teamid int,student int );";
-            }
-            
-            String query = droptable + " insert into " + tableName + "(" + line + ") values ";
+            String query = "insert into " + tableName + "(" + line + ") values ";
 
             while(scanner.hasNextLine()) {
                 query += "(" + scanner.nextLine() + "),";
@@ -149,22 +165,14 @@ public class evaluation {
 
             query = query.substring(0,query.length()-1);
             query += ";";
-
             //System.out.println(query);
 
-            // String firstColumn = csvReader.nextLine() + "Typed this";
-            //System.out.println(firstColumn);
-
-            // while (csvReader.hasNext()) {
-            //     System.out.print(csvReader.next());
-            // }
-
             scanner.close();
-            //System.out.println("\n");
             return query;
             
         } catch (Exception e) {
             System.out.println("An error occured.\n");
+            System.out.println("Statement didn't insert");
             e.printStackTrace();
         }
         return "";

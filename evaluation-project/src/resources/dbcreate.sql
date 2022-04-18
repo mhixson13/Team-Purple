@@ -62,7 +62,8 @@ drop table if exists teams;
 create table teams (
     evalid int,
     teamid int,
-    student int
+    student int,
+    unique(evalid,teamid,student)
 );
 
 insert into teams (evalid,teamid,student) values
@@ -92,7 +93,8 @@ create table response (
     student1 int,
     student2 int,
     category varchar(10),
-    value int
+    value int,
+    unique(evalid,student1,student2,category)
 );
 
 insert into response (evalid, student1,student2,category,value) values 
@@ -356,11 +358,11 @@ insert into response (evalid, student1,student2,category,value) values
 (1,19,18,'K',4),
 (1,19,18,'E',4),
 (1,19,18,'H',3),
-(1,19,18,'C',3),
-(1,19,18,'I',3),
-(1,19,18,'K',3),
-(1,19,18,'E',4),
-(1,19,18,'H',3);
+(1,19,19,'C',3),
+(1,19,19,'I',3),
+(1,19,19,'K',3),
+(1,19,19,'E',4),
+(1,19,19,'H',3);
 
 drop table if exists student;
 create table student (
@@ -553,39 +555,39 @@ drop view if exists v_response_avg;
 create view v_response_avg as
 select distinct student1 as s1, student2 as s2, round(avg(value),2) as s1_avg from response 
 group by student1, student2 order by student1;
-select * from v_response_avg;
+--select * from v_response_avg limit 10;
 
 drop view if exists v_response_cat_avg;
 create view v_response_cat_avg as
 select student1 as s1, category as cat, round(avg(value),2) as s1_avg from response 
 group by student1, category 
 order by student1, category;
-select * from v_response_cat_avg;
+--select * from v_response_cat_avg limit 10;
 
 drop view if exists v_response_C;
 create view v_response_C as
 select * from v_response_cat_avg where cat like '%C%';
-select * from v_response_C;
+--select * from v_response_C;
 
 drop view if exists v_response_H;
 create view v_response_H as
 select * from v_response_cat_avg where cat like '%H%';
-select * from v_response_H;
+--select * from v_response_H;
 
 drop view if exists v_response_E;
 create view v_response_E as
 select * from v_response_cat_avg where cat like '%E%';
-select * from v_response_E;
+--select * from v_response_E;
 
 drop view if exists v_response_I;
 create view v_response_I as
 select * from v_response_cat_avg where cat like '%I%';
-select * from v_response_I;
+--select * from v_response_I;
 
 drop view if exists v_response_K;
 create view v_response_K as
 select * from v_response_cat_avg where cat like '%K%';
-select * from v_response_K;
+--select * from v_response_K;
 
 --drop owned by mrblee;
 drop user if exists mrblee;

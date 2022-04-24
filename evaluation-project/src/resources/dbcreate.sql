@@ -16,47 +16,6 @@ drop database if exists cs375v1;
 create database cs375v1 encoding 'UTF-8';
 \c cs375v1;
 
--- drop table if exists question;
--- create table question (
---     id serial primary key,
---     question_id int,
---     evalid int,
---     text text,
---     question_type varchar(2)
--- );
-
--- insert into question (id,question_id,evalid,text,question_type) values
--- (1,1,1,'Level of Responsibility','L4'),
--- (2,2,1,'Level of Collaboration','L4'),
--- (3,3,1,'Were there contributions?','TF'),
--- (4,4,1,'Communicates Clearly?','MC'),
--- (5,1,2,'Motivation','L5'),
--- (6,2,2,'Team Community','L4'),
--- (7,3,2,'Doubts on Teammates','L3');
-
--- drop table if exists users;
--- create table users (
---     bannerid int,
---     name_ varchar(50),
---     username varchar(10),
---     acadstatus varchar(50)
--- );
-
--- insert into users (bannerid, name_, username, acadstatus) values
--- (100, 'Marlon Miller', 'mem19b', 'Student'),
--- (101, 'Miranda Hixson', 'mbh18b', 'Student'),
--- (102, 'Julio Lopez', 'jjl18b', 'Student'),
--- (103, 'Brent Reeves','mrblee','Teacher'),
--- (104, 'Alex Jackson','asj18a','Student'),
--- (105, 'Justin Raitz','jmr18c','Student'),
--- (106, 'Brett Hammot','bah20a','Student'),
--- (107,'Fischer Coburn', 'fwc17a', 'Student'),
--- (108,'Mitchel Mellrose','wmm18a','Student'),
--- (109,'Luis Ibarra','lai19a','Student'),
--- (110,'Christa Greenwood','cgg20a','Student'),
--- (111,'Megan Skeen','mfs18a','Student'),
--- (112,'Garrett Powell','gbp18a','Student');
-
 drop table teams cascade;
 drop table if exists teams;
 create table teams (
@@ -76,15 +35,24 @@ insert into teams (evalid,teamid,student) values
 (1,3,7),
 (1,3,8),
 (1,3,9),
-(2,1,2),
-(2,1,3),
-(2,1,4),
-(2,2,5),
-(2,2,6),
-(2,2,7),
-(2,3,8),
-(2,3,9),
-(2,3,10);
+(1,4,10),
+(1,4,11),
+(1,4,12),
+(1,5,13),
+(1,5,14),
+(1,5,15),
+(1,6,16),
+(1,6,17),
+(1,7,18),
+(1,7,19);
+-- (2,1,3),
+-- (2,1,4),
+-- (2,2,5),
+-- (2,2,6),
+-- (2,2,7),
+-- (2,3,8),
+-- (2,3,9),
+-- (2,3,10);
 
 drop table response cascade;
 drop table if exists response;
@@ -392,165 +360,6 @@ insert into student (studentid, student, studentName) values
 ('id18',18,'StudentR'),
 ('id19',19,'StudentS');
 
--- select a.studentname, a.studentid, b.teamid, c.category,c.value from student a 
--- inner join teams b on b.student = a.student 
--- inner join response c on c.student1 = a.student
--- order by a.studentname;
-
--- select a.studentName, a.studentid, b.teamid
--- from student a 
--- left join teams b on b.student = a.student
--- order by a.studentName;
-
-
--- drop table if exists choices;
--- create table choices (
---     id serial primary key,
---     question_type varchar(2),
---     choice varchar(2)
--- );
-
--- insert into choices (id, question_type, choice) values 
--- (1,'TF','T'),
--- (2,'TF','F'),
-
--- (3,'L4', '1'),
--- (4,'L4', '2'),
--- (5,'L4', '3'),
--- (6,'L4', '4'),
-
--- (7,'L5', '1'),
--- (8,'L5', '2'),
--- (9,'L5', '3'),
--- (10,'L5', '4'),
--- (11,'L5', '5');
-
--- -- set of evaluations per class
--- drop table if exists evaluation;
--- create table evaluation (
---     evalid int,
---     class_id int
--- );
-
--- insert into evaluation (evalid,class_id) values
--- (1,1001),
--- (2,1001),
--- (1,2002),
--- (2,2002);
-
--- drop table if exists class;
--- create table class (
---     class_id int,
---     class_name text
--- );
-
--- insert into class (class_id, class_name) values 
--- (1001,'Software Engineering II'),
--- (2002,'Programming Languages'),
--- (3003,'Advanced Bible'),
--- (4004,'2D Animation');
-
--- drop table if exists Section1;
--- create table Section1(
---     subsentence VARCHAR(500),
---     response_ VARCHAR(500)
--- );
-
--- insert into section1 (subsentence, response_) values
--- ('Contributing to the Teams Work', 'Does more or higher-quality work than expected.'),
--- ('Contributing to the Teams Work', 'Makes important contributions that improve the teams work.'),
--- ('Contributing to the Teams Work', 'Helps teammates who are having difficulty completing their work.'),
--- ('Contributing to the Teams Work', 'Demonstrates behaviors described immediately above and below'),
--- ('Contributing to the Teams Work','Completes a fair share of the teams work with acceptable quality.'),
--- ('Contributing to the Teams Work', 'Keeps commitments and completes assignments on time.'),
--- ('Contributing to the Teams Work', 'Helps teammates who are having difficulty when it is easy or important.'),
--- ('Contributing to the Teams Work', 'Demonstrates behaviors described immediately above and below.'),
--- ('Contributing to the Teams Work', 'Does not do a fair share of the teams work. Delivers sloppy or incomplete work.'),
--- ('Contributing to the Teams Work', 'Misses deadlines. Is late, unprepared, or absent for team meetings.'),
--- ('Contributing to the Teams Work', 'Does not assist teammates. Quits if the work becomes difficult.');
-
--- drop table if exists section2;
--- create table section2 (
---     subsentence VARCHAR(500),
---     response VARCHAR(500)
--- );
-
--- insert into section2(subsentence, response) values 
--- ('Interacting with Teammates','Asks for and shows an interest in teammates'' ideas and contributions. 
---     Makes sure teammates stay informed and understand each other.
---     Provides encouragement or enthusiasm to the team.
---     Asks teammates for feedback and uses their suggestions to improve.'),
--- ('Interacting with Teammates','Demonstrates behaviors described immediately above and below.'),
--- ('Interacting with Teammates','Listens to teammates and respects their contributions.
---     Communicates clearly. Shares information with teammates.
---     Participates fully in team activities.
---     Respects and responds to feedback from teammates.'),
--- ('Interacting with Teammates','Demonstrates behaviors described immediately above and below.'),
--- ('Interacting with Teammates','Interrupts, ignores, bosses, or makes fun of teammates.
---     Takes actions that affect teammates without their input. Does not share information.
---     Complains, makes excuses, or does not interact with teammates.
---     Is defensive. Will not accept help or advice from teammates.'); 
-
--- drop table if exists section3;
--- create table section3 (
---     subsentence VARCHAR(500),
---     response VARCHAR(500)
--- );
-
--- insert into section3(subsentence, response) values 
--- ('Keeping the Team on Track','Watches conditions affecting the team and monitors the team''s progress.
---     Makes sure that teammates are making appropriate progress.
---     Gives teammates specific, timely, and constructive feedback.'),
--- ('Keeping the Team on Track','Demonstrates behaviors described immediately above and below.'),
--- ('Keeping the Team on Track','Notices changes that influence the team''s success.
---     Knows what everyone on the team should be doing and notices problems.
---     Alerts teammates or suggests solutions when the team''s success is threatened.'),
--- ('Keeping the Team on Track','Demonstrates behaviors described immediately above and below.'),
--- ('Keeping the Team on Track','Is unaware of whether the team is meeting its goals.
---     Does not pay attention to teammates'' progress.
---     Avoids discussing team problems, even when they are obvious.');
-
--- drop table if exists section4;
--- create table section4 (
---     subsentence VARCHAR(500),
---     response VARCHAR(500)
--- );
-
--- insert into section4(subsentence, response) values 
--- ('Expecting Quality','Motivates the team to do excellent work.
---     Cares that the team does outstanding work, even if there is no additional reward.
---     Believes that the team can do excellent work.'),
--- ('Expecting Quality','Demonstrates behaviors described immediately above and below.'),
--- ('Expecting Quality','Encourages the team to do good work that meets all requirements.
---     Wants the team to perform well enough to earn all available rewards.
---     Believes that the team can fully meet its responsibilities.'),
--- ('Expecting Quality','Demonstrates behaviors described immediately above and below.'),
--- ('Expecting Quality','Satisfied even if the team does not meet assigned standards.
---     Wants the team to avoid work, even if it hurts the team.
---     Doubts that the team can meet its requirements.');
-
--- drop table if exists section5;
--- create table section5 (
---     subsentence VARCHAR(500),
---     response VARCHAR(500)
--- );
-
--- insert into section5(subsentence, response) values 
--- ('Having Related Knowledge, Skills, and Abilities','Demonstrates the knowledge, skills, and abilities to do excellent work.
---     Acquires new knowledge or skills to improve the team''s performance.
---     Able to perform the role of any team member if necessary.'),
--- ('Having Related Knowledge, Skills, and Abilities','Demonstrates behaviors described immediately above and below.'),
--- ('Having Related Knowledge, Skills, and Abilities','Demonstrates sufficient knowledge, skills, and abilities to contribute to the team''s work.
---     Acquires knowledge or skills as needed to meet requirements.
---     Able to perform some of the tasks normally done by other team members.'),
--- ('Having Related Knowledge, Skills, and Abilities','Demonstrates behaviors described immediately above and below.'),
--- ('Having Related Knowledge, Skills, and Abilities','Missing basic qualifications needed to be a member of the team.
---     Unable or unwilling to develop knowledge or skills to contribute to the team.
---     Unable to perform any of the duties of other team members.');
-
---Joining example of how classes connect to their appropriate
---evaluations
-
 drop view if exists v_response_avg;
 create view v_response_avg as
 select distinct student1 as s1, student2 as s2, round(avg(value),2) as s1_avg from response 
@@ -682,6 +491,11 @@ create user gbp18a with password 'gbp18a';
 grant connect on database cs375v1 to gbp18a;
 grant select, update, delete on all tables in schema public to gbp18a;
 
+--------------------------------------------------------
+-- Views:
+
+drop view if exists v_extreme;
+create view v_extreme as
 select evalid, student1, category, avg(value),
 case 
     when avg(value) = 5.0 or avg(value) = 1.0 then 'E'
@@ -727,108 +541,88 @@ allC as (
     inner join kte kte on cte.evalid = kte.evalid and cte.student1 = kte.student1 and cte.student2 = kte.student2
 )
 select * from allC;
-
 select * from v_general;
 
--- select aa.evalid,aa.student1, cc.value as c, hc.value as h
--- -- ic.value as I,
--- -- ec.value as E,
--- -- kc.value as K
--- from response aa
--- inner join cte cc on aa.student1 = cc.student1 and aa.category = cc.category and aa.student2 = cc.student2
--- inner join hte hc on aa.student1 = hc.student1 and aa.category = hc.category and aa.student2 = hc.student2
--- -- inner join ite ic on aa.student1 = ic.student1 and aa.category = ic.category and aa.student2 = ic.student2
--- -- inner join kte kc on aa.student1 = kc.student1 and aa.category = kc.category and aa.student2 = kc.student2
--- -- inner join ete ec on aa.student1 = ec.student1 and aa.category = ec.category and aa.student2 = ec.student2
--- --where cc.student1 != cc.student2 limit 20;  
--- limit 20;
+drop view if exists v_table_names;
+create view v_table_names as 
+with rator as (
+    select r.evalid, r.student1, s.studentname, r.student2, r.category, r.value from response r
+    inner join student s on s.student = r.student1 order by r.evalid, r.student1, r.student2, r.category
+),
 
--- select student1, category as categoryC, category as categoryE
--- from response where categoryC = 'C' and categoryE = 'E' limit 10;
+ratee as (
+   select r.evalid, r.student1, r.student2, s.studentname, r.category, r.value from response r
+   inner join student s on s.student = r.student2 order by r.evalid, r.student1, r.student2, r.category
+),
 
+nameratings as (
+    select response.evalid, rator.studentname as rator, ratee.studentname as ratee, response.category, response.value from response response
+    inner join rator rator on rator.evalid = response.evalid and rator.student1 = response.student1 and rator.student2 = response.student2 
+    and rator.category = response.category
+    inner join ratee ratee on ratee.evalid = response.evalid and ratee.student1 = response.student1 and ratee.student2 = response.student2
+    and ratee.category = response.category
+)
+select * from nameratings;
 
---\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
---select * from response;
---\copy teams(evalid, teamid, student) from 'evaluation-project/src/resources/teams.csv' delimiter ',' csv header;
+drop view if exists v_unanimous;
+create view v_unanimous as
+select evalid,
+case 
+    when rator != 'StudentA' then 'UNAN'
+    else 'StudentA'
+end as rator,
+case
+    when ratee != 'StudentA' then 'UNAN'
+    else 'StudentA'
+end as ratee, category, value
+from v_table_names where rator = 'StudentA' or ratee = 'StudentA';
+
+drop view if exists v_team_groups;
+create view v_team_groups as 
+with row_groups as (
+    select *, 
+    row_number() over(partition by teamid order by student) as row_number 
+    from teams where evalid = 1
+)
+select * from row_groups;
+select * from v_team_groups;
+
+drop view if exists v_general_two;
+create view v_general_two as 
+select *, row_number() over(partition by rator order by ratee) as row_number
+from v_general;
+select * from v_general_two;
+
+drop view if exists v_general_three;
+create view v_general_three as
+with rator1 as (
+    select * from v_general_two where row_number = 1
+),
+
+rator2 as (
+    select * from v_general_two where row_number = 2
+),
+
+rator3 as (
+    select * from v_general_two where row_number = 3
+),
+
+allrator as (
+    select rator1.evalid, rator1.rator, rator1.c as r1c, rator1.h as r1h, rator1.i as r1i, rator1.e as r1e, rator1.k as r1k,
+    rator2.c as r2c, rator2.h as r2h, rator2.i as r2i, rator2.e as r2e, rator2.k as r2k,
+    rator3.c as r3c, rator3.h as r3h, rator3.i as r3i, rator3.e as r3e, rator3.k as r3k
+    from rator1 rator1
+    join rator2 rator2 on rator2.evalid = rator1.evalid and rator2.rator = rator1.rator
+    left join rator3 rator3 on rator3.evalid = rator1.evalid and rator3.rator = rator1.rator
+    --join v_general_two v on v.rator = rator1.rator
+)
+select * from allrator;
+
+drop view if exists v_general_table;
+create view v_general_table as
+select aa.evalid, aa.rator, bb.row_number as ratorNo, aa.r1c, aa.r1h, aa.r1i, aa.r1e, aa.r1k, aa.r2c, aa.r2h, aa.r2i, aa.r2e, aa.r2k, aa.r3c, aa.r3h, aa.r3i, aa.r3e, aa.r3k
+from v_general_three aa 
+inner join v_team_groups bb on bb.student = aa.rator;
 
 --\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
 --\copy teams(evalid, teamid, student) from '../../resources/teams.csv' delimiter ',' csv header;
-
--- select a.class_name as Class, a.class_id as ClassID, b.evalid as Evaluation 
--- from class a join evaluation b on b.class_id = a.class_id order by a.class_name;
-
--- select a.class_name as Class, b.evalid, c.question_id, c.text from class a
--- join evaluation b on b.class_id = a.class_id
--- join question c on c.evalid = b.evalid 
--- order by a.class_name, b.evalid, c.question_id;
-
--- select a.id,a.question_id,a.evalid,a.text,a.question_type, b.choice from question a 
--- join choices b on a.question_type = b.question_type;
-
--- SELECT * FROM Section1;
-
--- drop view if exists v_teams;
--- create view v_teams as 
--- select * from teams;
-
--- select * from v_teams;
-
--- drop view if exists v_response;
--- CREATE VIEW v_response AS
--- SELECT *
--- FROM response;
-
--- SELECT * FROM v_response; 
-
--- select student2, avg(value) from response group by student2;
-
--- select a.studentname, a.studentid, b.teamid from student a inner join teams b on b.student = a.student order by a.studentname;
-
--- select distinct a.studentname, a.studentid, teamid from student a
--- inner join teams b on b.student = a.student order by a.studentname;
-
--- select * from response;
-
--- create view v_response_team as select r.evalid as eval, r.student1 as s1, 
--- r.student2 as s2, r.category as cat, r.value as v, t.teamid as team
--- from response r
--- inner join teams t on (t.student = r.student1)
--- order by r.evalid, r.student1, r.student2, r.category;
-
--- select * from v_response_team order by eval, s1, s2, cat limit 20;
-
--- -- avg C for class
--- select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'C' 
--- group by cat, eval, team;
-
--- -- avg H for class
--- select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'H'
--- group by cat, eval, team;
-
--- -- avg I for class
--- select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'I'
--- group by cat, eval, team;
-
--- -- avg K for class
--- select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'K'
--- group by cat, eval, team;
-
--- -- avg E for class
--- select cat, eval, team, count(v), avg(v) as avg from v_response_team where cat = 'E'
--- group by cat, eval, team;
-
--- -- avg of student ratings including self
--- select eval, team, s2, count(v) n, avg(v) avg from v_response_team where team < 3 
--- group by eval, team, s2 order by team, s2;
-
--- -- avg of student ratings excluding self
--- select eval, team, s2, count(v) n, avg(v) avg from v_response_team where s1 != s2 
--- and team < 3 group by eval, team, s2 order by team, s2;
-
--- -- team 1
--- select eval, team, s2, count(v) n, avg(v) avg from v_response_team where team = 1 
--- group by eval, team, s2 order by team, s2;
-
---  \i 'C:/Users/Marlon Miller/Desktop/SE2/Team-Purple/evaluation-project/src/resources/dbcreate.sql'
--- Command in psql to read CVS file and insert into tables
--- copy response(evalid, student1, student2, category, value) from 'C:\Users\Marlon Miller\Desktop\SE2\Team-Purple\evaluation-project\src\resources\response.csv' delimiter ',' csv header;

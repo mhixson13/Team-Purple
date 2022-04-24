@@ -682,6 +682,71 @@ create user gbp18a with password 'gbp18a';
 grant connect on database cs375v1 to gbp18a;
 grant select, update, delete on all tables in schema public to gbp18a;
 
+select evalid, student1, category, avg(value),
+case 
+    when avg(value) = 5.0 or avg(value) = 1.0 then 'E'
+    else 'NE'
+end as EL
+from response 
+where student1 != student2 group by evalid,student1,category
+order by evalid,student1,category;
+ 
+drop view if exists v_general;
+create view v_general as
+with cte as (
+    select evalid,student1,student2,category, value from response
+    where category = 'C'
+),
+
+hte as (
+    select evalid, student1,student2, category, value from response
+    where category = 'H'
+),
+
+ite as (
+    select evalid, student1,student2, category, value from response
+    where category = 'I'
+),
+
+ete as (
+    select evalid, student1,student2, category, value from response
+    where category = 'E'
+),
+
+kte as (
+    select evalid, student1,student2, category, value from response
+    where category = 'K'
+),
+
+allC as (
+    select cte.evalid,cte.student1 as Rator,cte.student2 as Ratee, cte.value as c, hte.value as h, ite.value as i, ete.value as e, kte.value as k
+    from cte cte
+    inner join hte hte on cte.evalid = hte.evalid and cte.student1 = hte.student1 and cte.student2 = hte.student2
+    inner join ite ite on cte.evalid = ite.evalid and cte.student1 = ite.student1 and cte.student2 = ite.student2
+    inner join ete ete on cte.evalid = ete.evalid and cte.student1 = ete.student1 and cte.student2 = ete.student2
+    inner join kte kte on cte.evalid = kte.evalid and cte.student1 = kte.student1 and cte.student2 = kte.student2
+)
+select * from allC;
+
+select * from v_general;
+
+-- select aa.evalid,aa.student1, cc.value as c, hc.value as h
+-- -- ic.value as I,
+-- -- ec.value as E,
+-- -- kc.value as K
+-- from response aa
+-- inner join cte cc on aa.student1 = cc.student1 and aa.category = cc.category and aa.student2 = cc.student2
+-- inner join hte hc on aa.student1 = hc.student1 and aa.category = hc.category and aa.student2 = hc.student2
+-- -- inner join ite ic on aa.student1 = ic.student1 and aa.category = ic.category and aa.student2 = ic.student2
+-- -- inner join kte kc on aa.student1 = kc.student1 and aa.category = kc.category and aa.student2 = kc.student2
+-- -- inner join ete ec on aa.student1 = ec.student1 and aa.category = ec.category and aa.student2 = ec.student2
+-- --where cc.student1 != cc.student2 limit 20;  
+-- limit 20;
+
+-- select student1, category as categoryC, category as categoryE
+-- from response where categoryC = 'C' and categoryE = 'E' limit 10;
+
+
 --\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
 --select * from response;
 --\copy teams(evalid, teamid, student) from 'evaluation-project/src/resources/teams.csv' delimiter ',' csv header;

@@ -16,7 +16,7 @@ drop database if exists cs375v1;
 create database cs375v1 encoding 'UTF-8';
 \c cs375v1;
 
-drop table teams cascade;
+drop table if exists teams cascade;
 drop table if exists teams;
 create table teams (
     evalid int,
@@ -54,7 +54,7 @@ insert into teams (evalid,teamid,student) values
 -- (2,3,9),
 -- (2,3,10);
 
-drop table response cascade;
+drop table if exists response cascade;
 drop table if exists response;
 create table response (
     evalid int,
@@ -564,15 +564,15 @@ nameratings as (
 )
 select * from nameratings;
 
-drop view if exists v_unanimous;
-create view v_unanimous as
+drop view if exists v_anonymous;
+create view v_anonymous as
 select evalid,
 case 
-    when rator != 'StudentA' then 'UNAN'
+    when rator != 'StudentA' then 'ANON'
     else 'StudentA'
 end as rator,
 case
-    when ratee != 'StudentA' then 'UNAN'
+    when ratee != 'StudentA' then 'ANON'
     else 'StudentA'
 end as ratee, category, value
 from v_table_names where rator = 'StudentA' or ratee = 'StudentA';
@@ -728,3 +728,5 @@ from (select * from v_official_extreme) t;
 select * from v_json_extreme;
 --\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
 --\copy teams(evalid, teamid, student) from '../../resources/teams.csv' delimiter ',' csv header;
+
+select evalid, student1, category, avg(value) from response where student1 != student2 and student1 = 7 group by evalid, student1, category order by evalid, student1, category;

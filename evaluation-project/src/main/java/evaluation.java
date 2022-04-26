@@ -84,6 +84,8 @@ public class evaluation {
         };
         String[] pathnames = allFiles.list(filter);
 
+        mainMenu(c);
+
         // String answer = "";
         // while(true) {
         //     System.out.print("Do you wish to insert .csv files? (Y/N) ");
@@ -93,22 +95,109 @@ public class evaluation {
         //     System.out.println("Wrong input. Try again.");
         //     answer = sc.nextLine();
         // }
-        
-
-        // System.out.println("\nFiles:");
-        // for(String pathname : pathnames)
-        //     System.out.println("*" + pathname);
-
-        // System.out.print("\n");
-        // while(true) {
-        //     System.out.print("Choose your file: ");
-        //     String choice = sc.nextLine();
-        //     break;
-        // }
 
         
         // insertCSV(c,teams);
-        createHtml(c);
+        // createHtml(c);
+    }
+
+    public static void mainMenu(Connection c) {
+        String answer = "";
+        Scanner sc = new Scanner(System.in);
+
+        while(true) {
+            System.out.println("\n*-- Main Menu --*");
+            System.out.println("1) Generate Report");
+            System.out.println("2) Insert CSV");
+            System.out.println("3) Quit");
+
+            System.out.print("\nSelect a number option: ");
+            answer = sc.nextLine();
+
+            switch(answer) {
+                case "1":
+                case "1)":
+                    createHtml(c);
+                    System.out.println("Report 'MainReport.html' has been created\n");
+                    break;
+                case "2":
+                case "2)":
+                    arrangeCSV(c);
+                    break;
+                case "3":
+                case "3)":
+                case "Quit":
+                    System.out.println("System being shut down.");
+                    break;
+                default:
+                    System.out.println("Option not available.");
+                    System.out.println("Try again.\n");
+                    //mainMenu(c);
+                    break;
+            }
+
+            if(answer.equals("3") || answer.equals("3)") || answer.equals("Quit"))
+                break;
+        }
+    }
+
+    public static void arrangeCSV(Connection c) {
+
+        String answer = "";
+        Scanner sc = new Scanner(System.in);
+
+        File responseCSV = new File("..\\..\\resources\\response.csv");
+        File teamsCSV = new File("..\\..\\resources\\teams.csv");
+        String results = parseCSV(responseCSV, "response");
+        String teams = parseCSV(teamsCSV, "teams");
+
+        File f = new File("..\\..\\resources");
+        
+        FilenameFilter filter = new FilenameFilter() {
+            @Override
+            public boolean accept(File f, String name) {
+                return name.endsWith(".csv");
+            }
+        };    
+
+        String[] pathnames = f.list(filter);
+
+        while(true) {
+            System.out.println("\n.csv files:");
+            int n = 1;
+            for(String pathname : pathnames) {
+                System.out.println(n++ + ") " + pathname);
+            }
+
+            System.out.println(n + ") Return");
+            System.out.print("\nChoose any .csv file you want to insert: ");
+            answer = sc.nextLine();
+            switch(answer) {
+                case "response":
+                case "response.csv":
+                case "1":
+                case "1)":
+                    insertCSV(c,results);
+                    break;
+                case "teams":
+                case "teams.csv":
+                case "2":
+                case "2)":
+                    insertCSV(c,teams);
+                    break;
+                case "Return":
+                case "return":
+                case "3":
+                case "3)":
+                    break;
+                default:
+                    System.out.println("Option not available.");
+                    System.out.println("Try again.");
+                    break;
+            }
+            if(answer.equals("return") || answer.equals("Return") || answer.equals("3") || answer.equals("3)"))
+                break;
+        } 
     }
 
     public static void createHtml(Connection c) {
@@ -195,7 +284,7 @@ public class evaluation {
             mainHTML += body_2 + html_2;
             writeFile.write(mainHTML); // Writes the whole string into the HTML
             writeFile.close();
-            System.out.println("Successfully created HTML file.\n");
+            System.out.println("Successfully created HTML file.");
         } 
         catch(Exception exec) {
             System.out.println("Error in creating HTML.");

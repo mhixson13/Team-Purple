@@ -28,37 +28,7 @@ import java.sql.ResultSet;
 
 import java.io.BufferedReader;
 
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*; 
-    
-
-public class evaluation extends HttpServlet
-{
-// Extend HttpServlet class
- 
-   private String message;
-
-   public void init() throws ServletException {
-      // Do required initialization
-      message = "Hello World";
-   }
-
-   public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-      
-      // Set response content type
-      response.setContentType("text/html");
-
-      // Actual logic goes here.
-      PrintWriter out = response.getWriter();
-      out.println("<h1>" + message + "</h1>");
-   }
-
-   public void destroy() {
-      // do nothing.
-   }
-
+public class evaluation {
 
     public static String csv_file = "ex.csv";
 
@@ -114,30 +84,58 @@ public class evaluation extends HttpServlet
         };
         String[] pathnames = allFiles.list(filter);
 
-        String answer = "";
-        while(true) {
-            System.out.print("Do you wish to insert .csv files? (Y/N) ");
-            answer = sc.nextLine();
-            if(answer.equals("Y") || answer.equals("N"))
-                break;
-            System.out.println("Wrong input. Try again.");
-            answer = sc.nextLine();
-        }
+        // String answer = "";
+        // while(true) {
+        //     System.out.print("Do you wish to insert .csv files? (Y/N) ");
+        //     answer = sc.nextLine();
+        //     if(answer.equals("Y") || answer.equals("N"))
+        //         break;
+        //     System.out.println("Wrong input. Try again.");
+        //     answer = sc.nextLine();
+        // }
         
 
-        System.out.println("\nFiles:");
-        for(String pathname : pathnames)
-            System.out.println("*" + pathname);
+        // System.out.println("\nFiles:");
+        // for(String pathname : pathnames)
+        //     System.out.println("*" + pathname);
 
-        System.out.print("\n");
-        while(true) {
-            System.out.print("Choose your file: ");
-            String choice = sc.nextLine();
-            break;
-        }
+        // System.out.print("\n");
+        // while(true) {
+        //     System.out.print("Choose your file: ");
+        //     String choice = sc.nextLine();
+        //     break;
+        // }
 
         
-        insertCSV(c,teams);
+        // insertCSV(c,teams);
+        createHtml(c);
+    }
+
+    public static void createHtml(Connection c) {
+        String query = "select * from v_official_extreme;";
+        System.out.println("query: "+ query);
+        ResultSet rs = null;
+        try {
+            // Statement statement = c.createStatement();
+            // int rows = statement.executeUpdate(query);
+            PreparedStatement pstmt = c.prepareStatement(query);
+            rs = pstmt.executeQuery();
+            String output = "";
+
+            while(rs.next()) {
+                System.out.print(rs.getString(1) + "\t");
+                System.out.print(rs.getString(2) + "\t");
+                System.out.print(rs.getString(3) + "\t");
+                System.out.print(rs.getString(4) + "\t");
+                System.out.print(rs.getString(5) + "\t");
+                System.out.print(rs.getString(6) + "\t");
+                System.out.println(rs.getString(7));
+                //output += rs.getString(1) + "\n";
+            }
+        } catch(Exception exec) {
+            System.out.println("Error in printing official extreme");
+            exec.printStackTrace();
+        }
     }
 
     public static void printEval(Connection c, String username) {

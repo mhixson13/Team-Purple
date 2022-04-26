@@ -399,97 +399,6 @@ select * from v_response_cat_avg where cat like '%K%';
 --select * from v_response_K;
 
 --drop owned by mrblee;
-drop user if exists mrblee;
-create user mrblee with password 'purplewhite';
-grant connect on database cs375v1 to mrblee;
-GRANT USAGE ON SCHEMA public TO mrblee;
-alter user mrblee with SUPERUSER;
-
-grant all on teams to mrblee;
-grant all on response to mrblee;
-grant all on student to mrblee;
-
-grant all on v_response_avg to mrblee; -- starting here
-grant all on v_response_cat_avg to mrblee;
-grant all on v_response_C to mrblee;
-grant all on v_response_H to mrblee;
-grant all on v_response_E to mrblee;
-grant all on v_response_I to mrblee;
-grant all on v_response_K to mrblee;
-
-grant select, update, delete on all tables in schema public to mrblee;
-
-drop owned by mem19b;
-drop user if exists mem19b;
-create user mem19b with password 'mem19b';
-grant connect on database cs375v1 to mem19b;
-grant select, update, delete on all tables in schema public to mem19b;
-
-drop owned by mbh18b;
-drop user if exists mbh18b;
-create user mbh18b with password 'mbh18b';
-grant connect on database cs375v1 to mbh18b;
-grant select, update, delete on all tables in schema public to mbh18b; 
-
-drop owned by jjl18b;
-drop user if exists jjl18b;
-create user jjl18b with password 'jjl18b';
-grant connect on database cs375v1 to jjl18b;
-grant select, update, delete on all tables in schema public to jjl18b;
-
-drop owned by asj18a;
-drop user if exists asj18a;
-create user asj18a with password 'asj18a';
-grant connect on database cs375v1 to asj18a;
-grant select, update, delete on all tables in schema public to asj18a;
-
-drop owned by jmr18c;
-drop user if exists jmr18c;
-create user jmr18c with password 'jmr18c';
-grant connect on database cs375v1 to jmr18c;
-grant select, update, delete on all tables in schema public to jmr18c;
-
-drop owned by bah20a;
-drop user if exists bah20a;
-create user bah20a with password 'bah20a';
-grant connect on database cs375v1 to bah20a;
-grant select, update, delete on all tables in schema public to bah20a;
-
-drop owned by fwc17a;
-drop user if exists fwc17a;
-create user fwc17a with password 'fwc17a';
-grant connect on database cs375v1 to fwc17a;
-grant select, update, delete on all tables in schema public to fwc17a;
-
-drop owned by wmm18a;
-drop user if exists wmm18a;
-create user wmm18a with password 'wmm18a';
-grant connect on database cs375v1 to wmm18a;
-grant select, update, delete on all tables in schema public to wmm18a;
-
-drop owned by lai19a;
-drop user if exists lai19a;
-create user lai19a with password 'lai19a';
-grant connect on database cs375v1 to lai19a;
-grant select, update, delete on all tables in schema public to lai19a;
-
-drop owned by cgg20a;
-drop user if exists cgg20a;
-create user cgg20a with password 'cgg20a';
-grant connect on database cs375v1 to cgg20a;
-grant select, update, delete on all tables in schema public to cgg20a;
-
-drop owned by mfs18a;
-drop user if exists mfs18a;
-create user mfs18a with password 'mfs18a';
-grant connect on database cs375v1 to mfs18a;
-grant select, update, delete on all tables in schema public to mfs18a;
-
-drop owned by gbp18a;
-drop user if exists gbp18a;
-create user gbp18a with password 'gbp18a';
-grant connect on database cs375v1 to gbp18a;
-grant select, update, delete on all tables in schema public to gbp18a;
 
 --------------------------------------------------------
 -- Views:
@@ -725,43 +634,163 @@ drop view if exists v_json_extreme;
 create view v_json_extreme as
 select array_to_json(array_agg(t))
 from (select * from v_official_extreme) t;
-select * from v_json_extreme;
+--select * from v_json_extreme;
+
+-- revoke all privileges on database cs375v1 from mrblee;
+-- revoke all privileges on table teams from mrblee;
+-- revoke all privileges on table response from mrblee;
+-- revoke all privileges on table student from mrblee;
+-- revoke all privileges on view v_response_avg from mrblee;
+-- revoke all privileges on view v_response_cat_avg from mrblee;
+-- revoke all privileges on view v_response_c from mrblee;
+-- revoke all privileges on view v_response_h from mrblee;
+-- revoke all privileges on view v_response_e from mrblee;
+-- revoke all privileges on view v_response_i from mrblee;
+-- revoke all privileges on view v_response_k from mrblee;
+-- revoke all privileges on view v_extreme from mrblee;
+-- revoke all privileges on view v_general from mrblee;
+-- revoke all privileges on view v_table_names from mrblee;
+-- revoke all privileges on view v_anonymous from mrblee;
+-- revoke all privileges on view v_team_groups from mrblee;
+-- revoke all privileges on view v_general_two from mrblee;
+-- revoke all privileges on view v_general_three from mrblee;
+-- revoke all privileges on view v_general_table from mrblee;
+-- revoke all privileges on view v_official_extreme from mrblee;
+-- revoke all privileges on view v_avg_self from mrblee;
+-- revoke all privileges on view v_avg_others from mrblee;
+-- revoke all privileges on view v_standard_deviation_self from mrblee;
+-- revoke all privileges on view v_official_general_avg from mrblee;
+-- revoke all privileges on view v_avg_and_std_cat from mrblee;
+-- revoke all privileges on view v_official_std_cat from mrblee;
+-- revoke all privileges on view v_json_extreme from mrblee;
+
+drop owned by mrblee;
+drop user if exists mrblee;
+create user mrblee with password 'purplewhite';
+grant connect on database cs375v1 to mrblee;
+GRANT USAGE ON SCHEMA public TO mrblee;
+alter user mrblee with SUPERUSER;
+
+grant all on teams to mrblee;
+grant all on response to mrblee;
+grant all on student to mrblee;
+
+grant all on v_response_avg to mrblee; -- starting here
+grant all on v_response_cat_avg to mrblee;
+grant all on v_response_C to mrblee;
+grant all on v_response_H to mrblee;
+grant all on v_response_E to mrblee;
+grant all on v_response_I to mrblee;
+grant all on v_response_K to mrblee;
+
+grant select, update, delete on all tables in schema public to mrblee;
+
+drop owned by mem19b;
+drop user if exists mem19b;
+create user mem19b with password 'mem19b';
+grant connect on database cs375v1 to mem19b;
+grant select, update, delete on all tables in schema public to mem19b;
+
+drop owned by mbh18b;
+drop user if exists mbh18b;
+create user mbh18b with password 'mbh18b';
+grant connect on database cs375v1 to mbh18b;
+grant select, update, delete on all tables in schema public to mbh18b; 
+
+drop owned by jjl18b;
+drop user if exists jjl18b;
+create user jjl18b with password 'jjl18b';
+grant connect on database cs375v1 to jjl18b;
+grant select, update, delete on all tables in schema public to jjl18b;
+
+drop owned by asj18a;
+drop user if exists asj18a;
+create user asj18a with password 'asj18a';
+grant connect on database cs375v1 to asj18a;
+grant select, update, delete on all tables in schema public to asj18a;
+
+drop owned by jmr18c;
+drop user if exists jmr18c;
+create user jmr18c with password 'jmr18c';
+grant connect on database cs375v1 to jmr18c;
+grant select, update, delete on all tables in schema public to jmr18c;
+
+drop owned by bah20a;
+drop user if exists bah20a;
+create user bah20a with password 'bah20a';
+grant connect on database cs375v1 to bah20a;
+grant select, update, delete on all tables in schema public to bah20a;
+
+drop owned by fwc17a;
+drop user if exists fwc17a;
+create user fwc17a with password 'fwc17a';
+grant connect on database cs375v1 to fwc17a;
+grant select, update, delete on all tables in schema public to fwc17a;
+
+drop owned by wmm18a;
+drop user if exists wmm18a;
+create user wmm18a with password 'wmm18a';
+grant connect on database cs375v1 to wmm18a;
+grant select, update, delete on all tables in schema public to wmm18a;
+
+drop owned by lai19a;
+drop user if exists lai19a;
+create user lai19a with password 'lai19a';
+grant connect on database cs375v1 to lai19a;
+grant select, update, delete on all tables in schema public to lai19a;
+
+drop owned by cgg20a;
+drop user if exists cgg20a;
+create user cgg20a with password 'cgg20a';
+grant connect on database cs375v1 to cgg20a;
+grant select, update, delete on all tables in schema public to cgg20a;
+
+drop owned by mfs18a;
+drop user if exists mfs18a;
+create user mfs18a with password 'mfs18a';
+grant connect on database cs375v1 to mfs18a;
+grant select, update, delete on all tables in schema public to mfs18a;
+
+drop owned by gbp18a;
+drop user if exists gbp18a;
+create user gbp18a with password 'gbp18a';
+grant connect on database cs375v1 to gbp18a;
+grant select, update, delete on all tables in schema public to gbp18a;
 --\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
 --\copy teams(evalid, teamid, student) from '../../resources/teams.csv' delimiter ',' csv header;
 
-\o page_html.html
+-- \o extreme_html.html 
 
-\pset format html
-\pset border 1
-\pset charset 'utf-8'
-\pset title 'Example1' 
-\pset tableattr align='center'
-\encoding utf-8
-select * from v_official_extreme
-\o
+-- \pset format html 
+-- \pset border 1 
+-- \pset charset 'utf-8' 
+-- \pset title 'Extreme Level'  
+-- \pset tableattr align='center' 
+-- \encoding utf-8 
+-- select * from v_official_extreme; 
+-- \o
 
-------------------
+-- ------------------
+-- \o sd_html.html
 
-\o page_html.html
+-- \pset format html
+-- \pset border 1
+-- \pset charset 'utf-8'
+-- \pset title 'Standard Deviation p/Student/Category' 
+-- \pset tableattr align='center'
+-- \encoding utf-8
+-- select * from v_official_std_cat;
+-- \o
 
-\pset format html
-\pset border 1
-\pset charset 'utf-8'
-\pset title 'Example2' 
-\pset tableattr align='center'
-\encoding utf-8
-select * from v_official_std_cat
-\o
+-- \o general_table.html
 
-\o page_html.html
-
-\pset format html
-\pset border 1
-\pset charset 'utf-8'
-\pset title 'Example3' 
-\pset tableattr align='center'
-\encoding utf-8
-select * from v_Official_general_avg
-\o
+-- \pset format html
+-- \pset border 1
+-- \pset charset 'utf-8'
+-- \pset title 'General Table' 
+-- \pset tableattr align='center'
+-- \encoding utf-8
+-- select * from v_Official_general_avg;
+-- \o
 
 -- select evalid, student1, category, avg(value) from response where student1 != student2 and student1 = 7 group by evalid, student1, category order by evalid, student1, category;

@@ -44,7 +44,6 @@ public class evaluation {
         //String csv = "\\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;";
         //System.out.println(csv);
 
-        
         System.out.println("\nWelcome to your Peer Evaluation Terminal Interface!");
         System.out.println("From: Created by Team-Purple\n");
 
@@ -65,40 +64,60 @@ public class evaluation {
                 Class.forName("org.postgresql.Driver");
                 c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
                 username, password);
-                //System.out.println("Success Message: " + c);
                 break;
             } catch (Exception e) {
                 System.out.println("\nYour account or password is incorrect.\n");
-                //System.out.println("C: "+ c);
                 continue;
             }
         }
 
         System.out.println("\nWelcome " + username + "!");
-        File allFiles = new File("..\\..\\resources");
-        FilenameFilter filter = new FilenameFilter() {
-            @Override
-            public boolean accept(File f, String name) {
-                return name.endsWith(".csv");
+
+        if(username.equals("mrblee")) 
+            mainMenu(c);
+        else 
+            studentMenu(c,username);
+    }
+
+    public static void studentMenu(Connection c, String student) {
+        String answer = "";
+        Scanner sc = new Scanner(System.in);
+
+        while(true) {
+            System.out.println("\n*-- Main Menu --*");
+            System.out.println("1) Generate my Report");
+            System.out.println("2) Quit");
+            
+            System.out.print("\nSelect a number option: ");
+            answer = sc.nextLine();
+
+            switch(answer) {
+                case "1":
+                case "1)":
+                    createStudentHtml(c,student);
+                    System.out.println("Report 'studentReport.html' has been created\n");
+                    break;
+                case "2":
+                case "2)":
+                case "Quit":
+                    System.out.println("System being shut down.");
+                    break;
+                default:
+                    System.out.println("Option not available.");
+                    System.out.println("Try again.\n");
+                    break;   
             }
-        };
-        String[] pathnames = allFiles.list(filter);
+            if(answer.equals("2") || answer.equals("2)") || answer.equals("Quit"))
+                break;
+        }
+    }
 
-        mainMenu(c);
-
-        // String answer = "";
-        // while(true) {
-        //     System.out.print("Do you wish to insert .csv files? (Y/N) ");
-        //     answer = sc.nextLine();
-        //     if(answer.equals("Y") || answer.equals("N"))
-        //         break;
-        //     System.out.println("Wrong input. Try again.");
-        //     answer = sc.nextLine();
-        // }
-
-        
-        // insertCSV(c,teams);
-        // createHtml(c);
+    public static void createStudentHtml(Connection c, String Student) {
+        String query = "select evalid, case when rator != '" + Student + 
+        "' then 'ANON' else '" + Student + "' end as rator, case when ratee != '" + 
+        Student + "' then 'ANON' else '" + Student + "' end as ratee, category, value " + 
+        "from v_table_names where rator = '" + Student + "' or ratee = '" + Student + "';";
+        System.out.println(query);
     }
 
     public static void mainMenu(Connection c) {
@@ -240,7 +259,7 @@ public class evaluation {
             rs = pstmt.executeQuery();
 
             mainHTML += table_header + table_caption_1 + "Extreme Level" + table_caption_2 + "<tr>";
-            mainHTML += th_1 + "evalid" + th_2 + th_1 + "student 1" + th_2 + th_1 + "C" + th_2 + th_1 + "H" + th_2 + th_1 + "E" + th_2 + th_1 + "I" + th_2 + th_1 + "K" + th_2 + "</tr>"; // Table Column Names
+            mainHTML += th_1 + "evalid" + th_2 + th_1 + "student" + th_2 + th_1 + "C" + th_2 + th_1 + "H" + th_2 + th_1 + "E" + th_2 + th_1 + "I" + th_2 + th_1 + "K" + th_2 + "</tr>"; // Table Column Names
 
             while(rs.next()) {
 
@@ -270,7 +289,7 @@ public class evaluation {
             rs = pstmt.executeQuery();
 
             mainHTML += table_header + table_caption_1 + "Standard Deviation p/Student/Category" + table_caption_2 + "<tr>";
-            mainHTML += th_1 + "evalid" + th_2 + th_1 + "student 1" + th_2 + th_1 + "C" + th_2 + th_1 + "H" + th_2 + th_1 + "E" + th_2 + th_1 + "I" + th_2 + th_1 + "K" + th_2 + "</tr>";
+            mainHTML += th_1 + "evalid" + th_2 + th_1 + "student" + th_2 + th_1 + "C" + th_2 + th_1 + "H" + th_2 + th_1 + "E" + th_2 + th_1 + "I" + th_2 + th_1 + "K" + th_2 + "</tr>";
             
             while(rs.next()) {
                 mainHTML += tr_1;

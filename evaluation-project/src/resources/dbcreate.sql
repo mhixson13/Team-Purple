@@ -341,18 +341,18 @@ create table student (
 );
 
 insert into student (studentid, student, studentName) values
-('id01',1,'StudentA'),
-('id02',2,'StudentB'),
-('id03',3,'StudentC'),
-('id04',4,'StudentD'),
-('id05',5,'StudentE'),
-('id06',6,'StudentF'),
-('id07',7,'StudentG'),
-('id08',8,'StudentH'),
-('id09',9,'StudentI'),
-('id10',10,'StudentJ'),
-('id11',11,'StudentK'),
-('id12',12,'StudentL'),
+('id01',1,'asj18a'),
+('id02',2,'bah20a'),
+('id03',3,'cgg20a'),
+('id04',4,'fwc17a'),
+('id05',5,'gbp18a'),
+('id06',6,'jjl18b'),
+('id07',7,'jmr18c'),
+('id08',8,'lai19a'),
+('id09',9,'mbh18b'),
+('id10',10,'mem19b'),
+('id11',11,'mfs18a'),
+('id12',12,'wmm18a'),
 ('id13',13,'StudentM'),
 ('id14',14,'StudentN'),
 ('id15',15,'StudentO'),
@@ -478,14 +478,14 @@ drop view if exists v_anonymous;
 create view v_anonymous as
 select evalid,
 case 
-    when rator != 'StudentA' then 'ANON'
-    else 'StudentA'
+    when rator != 'asj18a' then 'ANON'
+    else 'asj18a'
 end as rator,
 case
-    when ratee != 'StudentA' then 'ANON'
-    else 'StudentA'
+    when ratee != 'asj18a' then 'ANON'
+    else 'asj18a'
 end as ratee, category, value
-from v_table_names where rator = 'StudentA' or ratee = 'StudentA';
+from v_table_names where rator = 'asj18a' or ratee = 'asj18a';
 
 drop view if exists v_team_groups;
 create view v_team_groups as 

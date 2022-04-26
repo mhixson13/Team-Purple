@@ -729,4 +729,39 @@ select * from v_json_extreme;
 --\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
 --\copy teams(evalid, teamid, student) from '../../resources/teams.csv' delimiter ',' csv header;
 
-select evalid, student1, category, avg(value) from response where student1 != student2 and student1 = 7 group by evalid, student1, category order by evalid, student1, category;
+\o page_html.html
+
+\pset format html
+\pset border 1
+\pset charset 'utf-8'
+\pset title 'Example1' 
+\pset tableattr align='center'
+\encoding utf-8
+select * from v_official_extreme
+\o
+
+------------------
+
+\o page_html.html
+
+\pset format html
+\pset border 1
+\pset charset 'utf-8'
+\pset title 'Example2' 
+\pset tableattr align='center'
+\encoding utf-8
+select * from v_official_std_cat
+\o
+
+\o page_html.html
+
+\pset format html
+\pset border 1
+\pset charset 'utf-8'
+\pset title 'Example3' 
+\pset tableattr align='center'
+\encoding utf-8
+select * from v_Official_general_avg
+\o
+
+-- select evalid, student1, category, avg(value) from response where student1 != student2 and student1 = 7 group by evalid, student1, category order by evalid, student1, category;

@@ -496,7 +496,7 @@ grant select, update, delete on all tables in schema public to gbp18a;
 
 drop view if exists v_extreme;
 create view v_extreme as
-select evalid, student1, category, avg(value),
+select evalid, student1, category, round(avg(value),2),
 case 
     when avg(value) = 5.0 or avg(value) = 1.0 then 'E'
     else 'NE'
@@ -541,7 +541,7 @@ allC as (
     inner join kte kte on cte.evalid = kte.evalid and cte.student1 = kte.student1 and cte.student2 = kte.student2
 )
 select * from allC;
-select * from v_general;
+--select * from v_general;
 
 drop view if exists v_table_names;
 create view v_table_names as 
@@ -585,13 +585,13 @@ with row_groups as (
     from teams where evalid = 1
 )
 select * from row_groups;
-select * from v_team_groups;
+--select * from v_team_groups;
 
 drop view if exists v_general_two;
 create view v_general_two as 
 select *, row_number() over(partition by rator order by ratee) as row_number
 from v_general;
-select * from v_general_two;
+--select * from v_general_two;
 
 drop view if exists v_general_three;
 create view v_general_three as
@@ -624,5 +624,107 @@ select aa.evalid, aa.rator, bb.row_number as ratorNo, aa.r1c, aa.r1h, aa.r1i, aa
 from v_general_three aa 
 inner join v_team_groups bb on bb.student = aa.rator;
 
+-----------------------------------------
+-----------------------------------------
+-- Extreme Table
+drop view if exists v_official_extreme;
+create view v_official_extreme as
+with extremeC as (
+    select * from v_extreme where category = 'C'
+),
+extremeE as (
+    select * from v_extreme where category = 'E'
+),
+extremeH as (
+    select * from v_extreme where category = 'H'
+),
+extremeI as (
+    select * from v_extreme where category = 'I'
+),
+extremeK as (
+    select * from v_extreme where category = 'K'
+),
+allExtreme as (
+    select extremeC.evalid, extremeC.student1, extremeC.el as C, extremeH.el as H, extremeE.el as E, extremeI.el as I, extremeK.el as K 
+    from extremeC extremeC 
+    inner join extremeE extremeE on extremeC.evalid = extremeE.evalid and extremeC.student1 = extremeE.student1
+    inner join extremeH extremeH on extremeC.evalid = extremeH.evalid and extremeC.student1 = extremeH.student1
+    inner join extremeI extremeI on extremeC.evalid = extremeI.evalid and extremeC.student1 = extremeI.student1
+    inner join extremeK extremeK on extremeC.evalid = extremeK.evalid and extremeC.student1 = extremeK.student1
+)
+select * from allExtreme;
+--select * from v_official_extreme;
+
+drop view if exists v_avg_self;
+create view v_avg_self as
+select evalid, student1, avg(value) from response group by evalid, student1 order by evalid, student1;
+
+drop view if exists v_avg_others;
+create view v_avg_others as
+select evalid, student1, avg(value) from response where student1 != student2 group by evalid, student1 order by evalid, student1;
+
+drop view if exists v_standard_deviation_self;
+create view v_standard_deviation_self as 
+select evalid, student1, stddev(value) from response group by evalid, student1 order by evalid, student1;
+
+drop view if exists v_standard_deviation_without_self;
+create view v_standard_deviation_without_self as
+select evalid, student1, stddev(value) from response where student1!= student2 group by evalid, student1 order by evalid, student1;
+
+------- General Table
+
+drop view if exists v_Official_general_avg;
+create view v_Official_general_avg as
+select gg.evalid, gg.rator, gg.ratorno, gg.r1c, gg.r1h, gg.r1i, gg.r1e, gg.r1k, gg.r2c, gg.r2h, gg.r2i, gg.r2e, gg.r2k, gg.r3c, gg.r3h, gg.r3i, gg.r3e, gg.r3k,
+round(vas.avg,2) as avg_w_self, round(vao.avg,2) as avg_no_self, round(std1.stddev,3) as sd_w_self, round(std2.stddev,3) as sd_without_self 
+from v_general_table gg
+inner join v_avg_self vas on vas.evalid = gg.evalid and vas.student1 = gg.rator
+inner join v_avg_others vao on vao.evalid = gg.evalid and vao.student1 = gg.rator
+inner join v_standard_deviation_self std1 on std1.evalid = gg.evalid and std1.student1 = gg.rator
+inner join v_standard_deviation_without_self std2 on std2.evalid = gg.evalid and std2.student1 = gg.rator;
+--select * from v_Official_general_avg;
+
+drop view if exists v_avg_and_std_cat;
+create view v_avg_and_std_cat as
+select evalid, student1, category, avg(value), stddev(value) from response group by evalid, student1, category order by evalid, student1, category;
+
+drop view if exists v_official_std_cat;
+create view v_official_std_cat as 
+with stdc as (
+    select * from v_avg_and_std_cat where category = 'C'
+),
+stde as (
+    select * from v_avg_and_std_cat where category = 'E'
+),
+stdh as (
+    select * from v_avg_and_std_cat where category = 'H'
+),
+stdi as (
+    select * from v_avg_and_std_cat where category = 'I'
+),
+stdk as (
+    select * from v_avg_and_std_cat where category = 'C'
+),
+allstd as (
+    select stdc.evalid, stdc.student1, round(stdc.stddev,3) as C,round(stdh.stddev,3) as H, round(stde.stddev,3) as E, round(stdi.stddev,3) as I, round(stdk.stddev,3) as k
+    from stdc stdc
+    inner join stde stde on stde.evalid = stdc.evalid and stde.student1 = stdc.student1
+    inner join stdh stdh on stdh.evalid = stdc.evalid and stdh.student1 = stdc.student1
+    inner join stdi stdi on stdi.evalid = stdc.evalid and stdi.student1 = stdc.student1
+    inner join stdk stdk on stdk.evalid = stdc.evalid and stdk.student1 = stdc.student1
+)
+select * from allstd;
+--select * from v_official_std_cat;
+
+select * from v_Official_general_avg;
+select * from v_official_extreme;
+select * from v_official_std_cat;
+
+--drop view if exists json_official_general_avg;
+drop view if exists v_json_extreme;
+create view v_json_extreme as
+select array_to_json(array_agg(t))
+from (select * from v_official_extreme) t;
+select * from v_json_extreme;
 --\copy response(evalid, student1, student2, category, value) from '../../resources/response.csv' delimiter ',' csv header;
 --\copy teams(evalid, teamid, student) from '../../resources/teams.csv' delimiter ',' csv header;

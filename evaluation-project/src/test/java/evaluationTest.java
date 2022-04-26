@@ -623,6 +623,286 @@ public class evaluationTest {
                 e.printStackTrace();
             }
     }
+
+    @Test
+    public void java_41() {
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "pop17a", "pep17a");
+            System.out.println("Java_41 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_42(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "yjk18a", "jyk18a");
+            System.out.println("Java_42 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_43(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "meb15c", "mrb15c");
+            System.out.println("Java_43 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_44(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "abc17c", "acc17c");
+            System.out.println("Java_44 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_45(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "ded18a", "dcd18a");
+            System.out.println("Java_45 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_46(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "tje18a", "the18a");
+            System.out.println("Java_46 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_47(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "jrm15g", "jmm15g");
+            System.out.println("Java_47 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_48(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "sad12e", "ssd12e");
+            System.out.println("Java_48 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_49(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "jrb21h", "jfb21h");
+            System.out.println("Java_49 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_50(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "jdc22a", "jdd22a");
+            System.out.println("Java_50 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_51(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "jcd21e", "jee21e");
+            System.out.println("Java_51 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_52(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "jbe22a", "jxe22a");
+            System.out.println("Java_52 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_53(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "jxf20c", "jff20c");
+            System.out.println("Java_53 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_54(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "jxj21e", "jjj21e");
+            System.out.println("Java_54 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_55(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "aaa15a", "aaa16a");
+            System.out.println("Java_55 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_56(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "bab16b", "bbb16b");
+            System.out.println("Java_56 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_57(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "tre12a", "tre11a");
+            System.out.println("Java_57 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_58(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "cad20b", "cdd20b");
+            System.out.println("Java_58 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_59(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "gah18b", "geh18b");
+            System.out.println("Java_59 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
+
+    @Test
+    public void java_60(){
+        Connection c = null;
+        Scanner sc = new Scanner(System.in);
+        try {
+            Class.forName("org.postgresql.Driver");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cs375v1",
+            "sas17b", "ejk15b");
+            System.out.println("Java_60 Test has failed");
+            } catch (Exception e) {
+                assertNull(c);
+            }
+    }
     
     @Test
     public void sql_1() {
@@ -679,9 +959,11 @@ public class evaluationTest {
                 output += Integer.toString(rs.getInt(3)) + "\n";
             }
 
-            assertEquals("1 1 1\n1 1 2\n1 1 3\n1 2 4\n1 2 5\n1 2 6\n1 3 7\n1 3 8\n1 3 9\n2 1 2\n2 1 3\n2 1 4\n2 2 5\n2 2 6\n2 2 7\n2 3 8\n2 3 9\n2 3 10\n",output);
+            assertEquals("1 1 1\n1 1 2\n1 1 3\n1 2 4\n1 2 5\n1 2 6\n1 3 7\n1 3 8\n1 3 9\n1 4 10\n1 4 11\n1 4 12\n1 5 13\n1 5 14\n1 5 15\n1 6 16\n1 6 17\n1 7 18\n1 7 19\n",output);
             //1 1 1\n1 1 2\n1 1 3\n1 2 4\n1 2 5\n1 2 6\n1 3 7\n1 3 8\n1 3 9\n1 4 10\n1 4 11\n1 4 12\n1 5 13\n1 5 14\n1 5 15\n1 6 16\n1 6 17\n1 7 18\n1 7 19\n
             // assertNotNull(c);
+            // (1,1,1),
+
             } catch (Exception e) {
                 System.out.println("sql_2 Test has failed");
                 e.printStackTrace();
@@ -775,7 +1057,7 @@ public class evaluationTest {
                 output += Integer.toString(rs.getInt(2)) + "\n";
             }
 
-            assertEquals("1 6\n2 6\n3 6\n",output);
+            assertEquals("1 3\n2 3\n3 3\n4 3\n5 3\n6 2\n7 2\n",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -810,7 +1092,7 @@ public class evaluationTest {
                 // output += Integer.toString(rs.getInt(5)) + "\n";
             }
 
-            assertEquals("18 ",output);
+            assertEquals("19 ",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -868,7 +1150,7 @@ public class evaluationTest {
                 output += rs.getString(2) + "\n";
             }
 
-            assertEquals("1 1\n2 1\n",output);
+            assertEquals("1 1\n",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -899,7 +1181,7 @@ public class evaluationTest {
                 output += Integer.toString(rs.getInt(3)) + "\n";
             }
 
-            assertEquals("1 2 4\n1 2 5\n1 2 6\n2 2 5\n2 2 6\n2 2 7\n",output);
+            assertEquals("1 2 4\n1 2 5\n1 2 6\n",output);
 
             // assertNotNull(c);
             } catch (Exception e) {
@@ -930,7 +1212,7 @@ public class evaluationTest {
                 output += Integer.toString(rs.getInt(3)) + "\n";
             }
 
-            assertEquals("1 3 7\n1 3 8\n1 3 9\n2 3 8\n2 3 9\n2 3 10\n",output);
+            assertEquals("1 3 7\n1 3 8\n1 3 9\n",output);
 
             // assertNotNull(c);
             } catch (Exception e) {

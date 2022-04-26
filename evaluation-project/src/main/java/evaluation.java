@@ -112,28 +112,77 @@ public class evaluation {
     }
 
     public static void createHtml(Connection c) {
-        String query = "select * from v_official_extreme;";
-        System.out.println("query: "+ query);
+        String extreme_query = "select * from v_official_extreme;", general_query = "select * from v_Official_general_avg;", sd_query = "";
+        String html_doctype = "<!DOCTYPE html>", html_1 = "<html>", html_2 = "</html>", head_1 = "<head>", head_2 = "</head>", body_1 = "<body>", body_2 = "</html>";
+        String table_header = "<table border=\"1\" align=center>", table_close = "</table>", table_caption_1 = "<caption>", table_caption_2 = "</caption>";
+        String th_1 = "<th align=\"center\">", th_2 = "</th>";
+        String tr_1 = "<tr valign=\"top\">", tr_2 = "</tr>", td_1right = "<td align=\"right\">", td_1left = "<td align=\"left\">", td_2 = "</td>";
+        String mainHTML = "";
+        //System.out.println("query: "+ extreme_query);
         ResultSet rs = null;
+
         try {
-            // Statement statement = c.createStatement();
-            // int rows = statement.executeUpdate(query);
-            PreparedStatement pstmt = c.prepareStatement(query);
+            // Create and write HTML file
+            File html_file = new File("..\\..\\resources\\main-report.html");
+            FileWriter writeFile = new FileWriter("..\\..\\resources/main-report.html");
+
+            // General Table
+            PreparedStatement pstmt = c.prepareStatement(general_query); 
             rs = pstmt.executeQuery();
-            String output = "";
+
+            mainHTML += html_doctype + html_1 + head_1 + head_2 + body_1;
+
+            mainHTML += table_header + table_caption_1 + "General Table" + table_caption_2 + "<tr>";
+            mainHTML += th_1 + "evalid" + th_2 + th_1 + "rator" + th_2 +   th_1 + "ratorno" + th_2 + th_1 + "r1c" + th_2 + th_1 + "r1h" + th_2 + th_1 + "r1i" + th_2 + th_1 + "r1e" + th_2 + th_1 + "r1k" + th_2 + th_1 + "r2c" + th_2 + th_1 + "r2h" + th_2 + th_1 + "r2i" + th_2;
+            mainHTML += th_1 + "r2e" + th_2 + th_1 + "r2k" + th_2 +   th_1 + "r3c" + th_2 + th_1 + "r3h" + th_2 + th_1 + "r3i" + th_2 + th_1 + "r3e" + th_2 + th_1 + "r3k" + th_2 + th_1 + "avg_w_self" + th_2 + th_1 + "avg_no_self" + th_2 + th_1 + "sd_w_self" + th_2 + th_1 + "sd_wihtout_self" + th_2 + "</tr>";
+            
+            while(rs.next()) {
+                mainHTML += tr_1;
+                for(int i = 1; i <= 22; i++) {
+                    mainHTML += td_1right + rs.getString(i) + td_2;
+                }
+                mainHTML += tr_2;
+            }
+            mainHTML += table_close;
+            mainHTML += "<br></br>";
+
+            // Extreme Table
+            pstmt = c.prepareStatement(extreme_query); 
+            rs = pstmt.executeQuery();
+
+            mainHTML += table_header + table_caption_1 + "Extreme Level" + table_caption_2 + "<tr>";
+            mainHTML += th_1 + "evalid" + th_2 + th_1 + "student 1" + th_2 + th_1 + "C" + th_2 + th_1 + "H" + th_2 + th_1 + "E" + th_2 + th_1 + "I" + th_2 + th_1 + "K" + th_2 + "</tr>"; // Table Column Names
 
             while(rs.next()) {
-                System.out.print(rs.getString(1) + "\t");
-                System.out.print(rs.getString(2) + "\t");
-                System.out.print(rs.getString(3) + "\t");
-                System.out.print(rs.getString(4) + "\t");
-                System.out.print(rs.getString(5) + "\t");
-                System.out.print(rs.getString(6) + "\t");
-                System.out.println(rs.getString(7));
-                //output += rs.getString(1) + "\n";
+
+                mainHTML += tr_1;
+                mainHTML += td_1right + rs.getString(1) + td_2 + td_1right + rs.getString(2) + td_2;
+
+                for(int i = 3; i <= 7; i++) {
+                    mainHTML += td_1left + rs.getString(i) + td_2;
+                }
+
+                mainHTML += tr_2;
+
+                // System.out.print(rs.getString(1) + "\t");
+                // System.out.print(rs.getString(2) + "\t");
+                // System.out.print(rs.getString(3) + "\t");
+                // System.out.print(rs.getString(4) + "\t");
+                // System.out.print(rs.getString(5) + "\t");
+                // System.out.print(rs.getString(6) + "\t");
+                // System.out.println(rs.getString(7));
             }
-        } catch(Exception exec) {
-            System.out.println("Error in printing official extreme");
+            mainHTML += table_close;
+
+            mainHTML += "<br></br>";
+
+            mainHTML += body_2 + html_2;
+            writeFile.write(mainHTML); // Writes the whole string into the HTML
+            writeFile.close();
+            System.out.println("Successfully created HTML file.\n");
+        } 
+        catch(Exception exec) {
+            System.out.println("Error in creating HTML.");
             exec.printStackTrace();
         }
     }

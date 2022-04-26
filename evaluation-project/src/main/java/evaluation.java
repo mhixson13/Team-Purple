@@ -117,6 +117,45 @@ public class evaluation {
         "' then 'ANON' else '" + Student + "' end as rator, case when ratee != '" + 
         Student + "' then 'ANON' else '" + Student + "' end as ratee, category, value " + 
         "from v_table_names where rator = '" + Student + "' or ratee = '" + Student + "';";
+        String mainHTML= "";
+        String html_doctype = "<!DOCTYPE html>", html_1 = "<html>", html_2 = "</html>", head_1 = "<head>", head_2 = "</head>", body_1 = "<body>", body_2 = "</html>";
+        String table_header = "<table border=\"1\" align=center>", table_close = "</table>", table_caption_1 = "<caption>", table_caption_2 = "</caption>";
+        String th_1 = "<th align=\"center\">", th_2 = "</th>";
+        String tr_1 = "<tr valign=\"top\">", tr_2 = "</tr>", td_1right = "<td align=\"right\">", td_1left = "<td align=\"left\">", td_2 = "</td>";
+    
+        ResultSet rs = null;
+       
+        try {
+            File stu_html_file = new File("..\\..\\resources\\student-report.html");
+            FileWriter writeFileStudent = new FileWriter("..\\..\\resources\\student-report.html");
+
+            PreparedStatement statement = c.prepareStatement(query);
+            rs = statement.executeQuery();
+
+            mainHTML += html_doctype + html_1 + head_1 + head_2 + body_1;
+            mainHTML += table_header + table_caption_1 + "Student Report for " + Student + table_caption_2 + "</tr>";
+            mainHTML += th_1 + "evalid" + th_2 + th_1 + "rator" + th_2 + th_1 + "ratee" + th_2 + th_1 + "category" + th_2 + th_1 + "value" + th_2 + "</tr>";
+
+            while(rs.next()) {
+                mainHTML += tr_1;
+                for(int i = 1; i <= 5; i++) {
+                    mainHTML += td_1right + rs.getString(i) + td_2;
+                }
+                mainHTML += tr_2;
+            }
+            mainHTML += table_close;
+            mainHTML += "<br></br>";
+
+            mainHTML += body_2 + html_2;
+            writeFileStudent.write(mainHTML);
+            writeFileStudent.close();
+            System.out.println("Successfully created HTML file.");
+       }
+       catch (Exception e) {
+            System.out.println("Error in creating Student HTML.");
+            e.printStackTrace();
+       }
+
         System.out.println(query);
     }
 

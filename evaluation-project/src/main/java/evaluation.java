@@ -112,7 +112,7 @@ public class evaluation {
     }
 
     public static void createHtml(Connection c) {
-        String extreme_query = "select * from v_official_extreme;", general_query = "select * from v_Official_general_avg;", sd_query = "";
+        String extreme_query = "select * from v_official_extreme;", general_query = "select * from v_Official_general_avg;", sd_query = "select * from v_official_std_cat;";
         String html_doctype = "<!DOCTYPE html>", html_1 = "<html>", html_2 = "</html>", head_1 = "<head>", head_2 = "</head>", body_1 = "<body>", body_2 = "</html>";
         String table_header = "<table border=\"1\" align=center>", table_close = "</table>", table_caption_1 = "<caption>", table_caption_2 = "</caption>";
         String th_1 = "<th align=\"center\">", th_2 = "</th>";
@@ -175,6 +175,22 @@ public class evaluation {
             mainHTML += table_close;
 
             mainHTML += "<br></br>";
+
+            // STD Table
+            pstmt = c.prepareStatement(sd_query); 
+            rs = pstmt.executeQuery();
+
+            mainHTML += table_header + table_caption_1 + "Standard Deviation p/Student/Category" + table_caption_2 + "<tr>";
+            mainHTML += th_1 + "evalid" + th_2 + th_1 + "student 1" + th_2 + th_1 + "C" + th_2 + th_1 + "H" + th_2 + th_1 + "E" + th_2 + th_1 + "I" + th_2 + th_1 + "K" + th_2 + "</tr>";
+            
+            while(rs.next()) {
+                mainHTML += tr_1;
+                for(int i = 1; i <= 7; i++) {
+                    mainHTML += td_1right + rs.getString(i) + td_2;
+                }
+                mainHTML += tr_2;
+            }
+            mainHTML += table_close;
 
             mainHTML += body_2 + html_2;
             writeFile.write(mainHTML); // Writes the whole string into the HTML

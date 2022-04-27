@@ -156,7 +156,7 @@ public class evaluation {
             e.printStackTrace();
        }
 
-        System.out.println(query);
+        //System.out.println(query);
     }
 
     public static void mainMenu(Connection c) {

@@ -156,7 +156,7 @@ public class evaluation {
             e.printStackTrace();
        }
 
-        //System.out.println(query);
+        System.out.println(query);
     }
 
     public static void mainMenu(Connection c) {
@@ -297,7 +297,7 @@ public class evaluation {
             pstmt = c.prepareStatement(extreme_query); 
             rs = pstmt.executeQuery();
 
-            mainHTML += table_header + table_caption_1 + "Extreme Level" + table_caption_2 + "<tr>";
+            mainHTML += table_header + table_caption_1 + "Extreme Level" + table_caption_2 + "<thead><tr><th colspan=\"7\">NE = Non-Extreme, E = Extreme</th></tr></thead>" +"<tr>";
             mainHTML += th_1 + "evalid" + th_2 + th_1 + "student" + th_2 + th_1 + "C" + th_2 + th_1 + "H" + th_2 + th_1 + "E" + th_2 + th_1 + "I" + th_2 + th_1 + "K" + th_2 + "</tr>"; // Table Column Names
 
             while(rs.next()) {
@@ -418,3 +418,4 @@ public class evaluation {
         return "";
     }
 }
+
